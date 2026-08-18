@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && . \"$HOME/.env\" && CLOUDFLARE_API_TOKEN=\"$CLOUDFLARE_API_TOKEN_PERSONAL\" CLOUDFLARE_ACCOUNT_ID=\"$CLOUDFLARE_ACCOUNT_ID_PERSONAL\" wrangler pages deploy dist --project-name personal-web --branch main --commit-dirty=true"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -18,10 +19,12 @@
   },
   "allowScripts": {
     "esbuild@0.28.2": true,
-    "fsevents@2.3.3": true
+    "fsevents@2.3.3": true,
+    "workerd@1.20260811.1": true
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.123.0"
   }
 }
