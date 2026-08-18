@@ -1,0 +1,35 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base title="Blog" description="Notes on robotics, drones, machine learning and embedded systems.">
+	<section>
+		<div class="wrap">
+			<h2 class="section-title">Blog</h2>
+			{
+				posts.length === 0 ? (
+					<p>Nothing published yet.</p>
+				) : (
+					<ul class="post-list">
+						{posts.map((post) => (
+							<li>
+								<h2>
+									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+								</h2>
+								<time datetime={post.data.date.toISOString()}>
+									{post.data.date.toLocaleDateString("en-GB", { dateStyle: "long" })}
+								</time>
+								<p>{post.data.description}</p>
+							</li>
+						))}
+					</ul>
+				)
+			}
+		</div>
+	</section>
+</Base>

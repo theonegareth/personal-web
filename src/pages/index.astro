@@ -1,0 +1,151 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, experience, education, skills, languages, certifications, interests } from "../data/site";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3);
+---
+
+<Base>
+	<section class="hero">
+		<div class="wrap">
+			<h1>{site.name}</h1>
+			<p class="role">{site.role}</p>
+			<p class="tagline">{site.tagline}</p>
+			<div class="actions">
+				<a class="btn btn-primary" href="/projects/">View projects</a>
+				<a class="btn" href={`mailto:${site.email}`}>Get in touch</a>
+				<a class="btn" href={site.github} rel="me noopener">GitHub</a>
+				<a class="btn" href={site.linkedin} rel="me noopener">LinkedIn</a>
+			</div>
+		</div>
+	</section>
+
+	<section id="about">
+		<div class="wrap">
+			<h2 class="section-title">About</h2>
+			<p class="prose">
+				Engineering student specializing in robotics and automation, with experience in organizational
+				leadership and public speaking. Skilled in problem-solving, teamwork, and cross-cultural
+				communication. Looking for opportunities to apply technical expertise to real-world innovations.
+			</p>
+			<div class="grid" style="margin-top: 2rem;">
+				<div class="card">
+					<h3>Education</h3>
+					{
+						education.map((item) => (
+							<div class="stack">
+								<strong>{item.degree}</strong>
+								<p class="meta">{item.school} · {item.detail}</p>
+								<p>{item.fields}</p>
+							</div>
+						))
+					}
+				</div>
+				<div class="card">
+					<h3>Languages</h3>
+					<ul class="plain-list">
+						{languages.map((item) => <li><strong>{item.name}</strong> — {item.level}</li>)}
+					</ul>
+				</div>
+				<div class="card">
+					<h3>Interests</h3>
+					<ul>
+						{interests.map((item) => <li>{item}</li>)}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="experience">
+		<div class="wrap">
+			<h2 class="section-title">Experience & leadership</h2>
+			<ol class="timeline">
+				{
+					experience.map((job) => (
+						<li>
+							<p class="period">{job.period}</p>
+							<h3>{job.role}</h3>
+							<p class="org">{job.org}{job.location ? ` · ${job.location}` : ""}</p>
+							<p>{job.summary}</p>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<section id="skills">
+		<div class="wrap">
+			<h2 class="section-title">Skills</h2>
+			<div class="grid">
+				{
+					skills.map((group) => (
+						<div class="card">
+							<h3>{group.group}</h3>
+							<ul>
+								{group.items.map((item) => (
+									<li>{item}</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+
+			<h3 class="subhead">Certifications</h3>
+			<div class="grid">
+				{
+					certifications.map((cert) => (
+						<div class="card">
+							<strong>{cert.name}</strong>
+							<p class="meta">{cert.issuer} · {cert.date}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	{
+		posts.length > 0 && (
+			<section id="writing">
+				<div class="wrap">
+					<h2 class="section-title">Writing</h2>
+					<ul class="post-list">
+						{posts.map((post) => (
+							<li>
+								<h2>
+									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+								</h2>
+								<time datetime={post.data.date.toISOString()}>
+									{post.data.date.toLocaleDateString("en-GB", { dateStyle: "long" })}
+								</time>
+								<p>{post.data.description}</p>
+							</li>
+						))}
+					</ul>
+					<p style="margin-top: 2rem;">
+						<a href="/blog/">All posts →</a>
+					</p>
+				</div>
+			</section>
+		)
+	}
+
+	<section id="contact">
+		<div class="wrap">
+			<h2 class="section-title">Contact</h2>
+			<p class="prose">
+				Open to opportunities in robotics, automation, and applied machine learning.
+			</p>
+			<ul class="plain-list" style="margin-top: 1rem;">
+				<li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+				<li>{site.location}</li>
+			</ul>
+		</div>
+	</section>
+</Base>
