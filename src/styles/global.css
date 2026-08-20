@@ -412,3 +412,22 @@ time {
 	margin: 3rem 0 1.25rem;
 	font-size: 1.35rem;
 }
+
+/* Four items in a three-track auto-fill grid leave two dead cells on the second
+   row. Pair them instead: 1 column under 48rem, 2 above, always full rows. */
+.grid-pairs {
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 48rem) {
+	.grid-pairs {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.hero-links {
+	display: flex;
+	gap: 1.25rem;
+	margin: 1.25rem 0 0;
+	font-size: 0.95rem;
+}

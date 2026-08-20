@@ -249,7 +249,7 @@ export const education = [
 	{
 		degree: "Bachelor of Engineering, Automotive and Robotics Engineering",
 		school: "BINUS ASO School of Engineering, BINUS University",
-		detail: "2023 - 2027 (expected) — GPA 3.86/4.00",
+		detail: "2023 - 2027 (expected) - GPA 3.86/4.00",
 		fields: "Digital Logic Design, Microcontrollers, Robotics Systems, Control Engineering",
 	},
 	{
@@ -269,9 +269,9 @@ export const skills = [
 
 export const languages = [
 	{ name: "Indonesian", level: "Native" },
-	{ name: "English", level: "Fluent — IELTS 7.0" },
-	{ name: "Japanese", level: "Basic — JLPT N5 (expected)" },
-	{ name: "Mandarin", level: "Basic — HSK 2" },
+	{ name: "English", level: "Fluent - IELTS 7.0" },
+	{ name: "Japanese", level: "Basic - JLPT N5 (expected)" },
+	{ name: "Mandarin", level: "Basic - HSK 2" },
 ];
 
 export const certifications = [
@@ -282,8 +282,8 @@ export const certifications = [
 ];
 
 export const interests = [
-	"Public speaking and debate — Wardaya Gavel Club",
-	"Entrepreneurship and innovation — founder, Business Plan Club",
-	"Drone technology and autonomous systems — AeroBase R&D",
-	"Esports event organizing — 80+ team tournaments",
+	"Public speaking and debate - Wardaya Gavel Club",
+	"Entrepreneurship and innovation - founder, Business Plan Club",
+	"Drone technology and autonomous systems - AeroBase R&D",
+	"Esports event organizing - 80+ team tournaments",
 ];

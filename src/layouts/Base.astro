@@ -8,7 +8,7 @@ type Props = {
 };
 
 const { title, description = site.tagline } = Astro.props;
-const pageTitle = title ? `${title} — ${site.shortName}` : `${site.shortName} — Robotics & Automation`;
+const pageTitle = title ? `${title} - ${site.shortName}` : `${site.shortName} - Robotics & Automation`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site ?? site.url).href;
 const ogImage = new URL("/og.png", Astro.site ?? site.url).href;
@@ -36,7 +36,7 @@ const nav = [
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content={`${site.name} — ${site.role}`} />
+		<meta property="og:image:alt" content={`${site.name} - ${site.role}`} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:image" content={ogImage} />
 	</head>
