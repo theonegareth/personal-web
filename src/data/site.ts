@@ -1,3 +1,8 @@
+import strawberryArm from "../assets/projects/strawberry-arm.jpg";
+import plantesaLeaf from "../assets/projects/plantesa-leaf.jpg";
+import goldPrice from "../assets/projects/gold-price.png";
+import turtlebotRaspicam from "../assets/projects/turtlebot-raspicam.png";
+
 export const site = {
 	name: "Gareth Aurelius Harrison",
 	shortName: "Gareth A. Harrison",
@@ -19,6 +24,9 @@ export type Project = {
 	points: string[];
 	href?: string;
 	hrefLabel?: string;
+	image?: ImageMetadata;
+	imageAlt?: string;
+	featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -34,6 +42,8 @@ export const projects: Project[] = [
 			"Ran intrinsic camera calibration for a Raspberry Pi Camera V2 and designed a tiered landmark system to mitigate long-term dead-reckoning drift.",
 		],
 		href: "https://github.com/theonegareth/turtlebot-toyohashi",
+		image: turtlebotRaspicam,
+		imageAlt: "rqt dynamic reconfigure panel tuning the Raspberry Pi camera node on the TurtleBot",
 	},
 	{
 		title: "Strawberry Picking Robotic Arm",
@@ -47,6 +57,9 @@ export const projects: Project[] = [
 			"Quantized the model to INT8 TensorFlow Lite for Raspberry Pi 4B deployment, targeting 20-30 FPS.",
 		],
 		href: "https://github.com/theonegareth/strawberryPicker",
+		image: strawberryArm,
+		imageAlt: "SolidWorks render of the strawberry-picking robotic arm with its slotted basket end effector",
+		featured: true,
 	},
 	{
 		title: "IndoHoaxDetector",
@@ -107,6 +120,9 @@ export const projects: Project[] = [
 			"Applied a CNN to webcam images for early tomato leaf disease detection.",
 		],
 		href: "https://github.com/theonegareth/Plantesa",
+		image: plantesaLeaf,
+		imageAlt: "Tomato leaf with early blight lesions outlined in red by the Plantesa detector, reading Brown 7.06%",
+		featured: true,
 	},
 	{
 		title: "Depression Detection via Voice Analysis",
@@ -130,6 +146,8 @@ export const projects: Project[] = [
 			"Evaluated with ROC and precision-recall curves, a confusion matrix, and feature importance.",
 		],
 		href: "https://github.com/theonegareth/GoldPricePredictor",
+		image: goldPrice,
+		imageAlt: "Line chart of Antam gold price in IDR from 2010 to 2026",
 	},
 	{
 		title: "Plastic Shredder & Vibration Mixer",

@@ -1,6 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/site";
+
+// Charts and UI screenshots have their own aspect ratio; crop only photographs and renders.
+const contain = (project: (typeof projects)[number]) => project.image?.format === "png";
 ---
 
 <Base
@@ -9,33 +13,46 @@ import { projects } from "../../data/site";
 >
 	<section>
 		<div class="wrap">
-			<h2 class="section-title">Projects</h2>
+			<div class="section-head">
+				<h2 class="section-title">Projects</h2>
+				<span>{projects.length} projects, 2023 to now</span>
+			</div>
 			<div class="grid">
 				{
 					projects.map((project) => (
 						<article class="card">
-							<h3>{project.title}</h3>
-							{(project.org || project.period) && (
-								<p class="meta">{[project.org, project.period].filter(Boolean).join(" · ")}</p>
+							{project.image && (
+								<figure class:list={{ contain: contain(project) }}>
+									<Image src={project.image} alt={project.imageAlt ?? project.title} widths={[480, 720]} sizes="(min-width: 48rem) 22rem, 100vw" />
+								</figure>
 							)}
-							<ul class="tags">
-								{project.tags.map((tag) => (
-									<li>{tag}</li>
-								))}
-							</ul>
-							<p>{project.blurb}</p>
-							<ul>
-								{project.points.map((point) => (
-									<li>{point}</li>
-								))}
-							</ul>
-							{project.href && (
-								<p class="card-link">
-									<a href={project.href} rel="noopener">
-										{project.hrefLabel ?? "Repository"} →
-									</a>
-								</p>
-							)}
+							<div class="card-body">
+								{(project.org || project.period) && (
+									<p class="meta">{[project.org, project.period].filter(Boolean).join(" · ")}</p>
+								)}
+								<h3>{project.title}</h3>
+								<p>{project.blurb}</p>
+								<details>
+									<summary>What I did</summary>
+									<ul>
+										{project.points.map((point) => (
+											<li>{point}</li>
+										))}
+									</ul>
+								</details>
+								<ul class="tags">
+									{project.tags.map((tag) => (
+										<li>{tag}</li>
+									))}
+								</ul>
+								{project.href && (
+									<p class="card-link">
+										<a href={project.href} rel="noopener">
+											{project.hrefLabel ?? "Repository"} →
+										</a>
+									</p>
+								)}
+							</div>
 						</article>
 					))
 				}

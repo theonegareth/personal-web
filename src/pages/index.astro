@@ -1,78 +1,113 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import { site, experience, education, skills, languages, certifications, interests } from "../data/site";
+import { site, projects, experience, education, skills, languages, certifications } from "../data/site";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
+
+const featured = projects.filter((p) => p.featured);
+const hero = featured[0];
+const rest = projects.filter((p) => !p.featured);
 ---
 
 <Base>
 	<section class="hero">
-		<div class="wrap">
-			<h1>{site.name}</h1>
-			<p class="role">{site.role}</p>
-			<p class="tagline">{site.tagline}</p>
-			<div class="actions">
-				<a class="btn btn-primary" href="/projects/">View projects</a>
-				<a class="btn" href={`mailto:${site.email}`}>Get in touch</a>
+		<div class="wrap hero-grid">
+			<div>
+				<p class="eyebrow">Robotics · Automation · Applied ML</p>
+				<h1>{site.name}</h1>
+				<p class="lede">
+					Automotive and Robotics Engineering student at BINUS ASO, building robots that navigate, see,
+					and decide. Based in {site.location}.
+				</p>
+				<div class="actions">
+					<a class="btn btn-primary" href="/projects/">See the work</a>
+					<p class="hero-links">
+						<a href={site.github} rel="me noopener">GitHub</a>
+						<a href={site.linkedin} rel="me noopener">LinkedIn</a>
+						<a href={`mailto:${site.email}`}>Email</a>
+					</p>
+				</div>
 			</div>
-			<p class="hero-links">
-				<a href={site.github} rel="me noopener">GitHub</a>
-				<a href={site.linkedin} rel="me noopener">LinkedIn</a>
-			</p>
+			{
+				hero?.image && (
+					<figure class="hero-figure">
+						<Image src={hero.image} alt={hero.imageAlt ?? hero.title} widths={[480, 720, 960]} sizes="(min-width: 56rem) 34rem, 100vw" loading="eager" />
+						<figcaption>
+							{hero.title} — {hero.org}
+						</figcaption>
+					</figure>
+				)
+			}
+		</div>
+		<div class="wrap">
+			<dl class="facts">
+				<div>
+					<dt>Studying</dt>
+					<dd>B.Eng. Robotics, class of 2027</dd>
+				</div>
+				<div>
+					<dt>Most recently</dt>
+					<dd>Lab assistant, Toyohashi University of Technology</dd>
+				</div>
+				<div>
+					<dt>Competitions</dt>
+					<dd>KRTI 2024 and 2025 with AeroBASE</dd>
+				</div>
+				<div>
+					<dt>GPA</dt>
+					<dd>3.86 / 4.00</dd>
+				</div>
+			</dl>
 		</div>
 	</section>
 
-	<section id="about">
+	<section id="work">
 		<div class="wrap">
-			<h2 class="section-title">About</h2>
-			<p class="prose">
-				Engineering student specializing in robotics and automation, with experience in organizational
-				leadership and public speaking. Skilled in problem-solving, teamwork, and cross-cultural
-				communication. Looking for opportunities to apply technical expertise to real-world innovations.
-			</p>
-			<div class="grid" style="margin-top: 2rem;">
-				<div class="card">
-					<h3>Education</h3>
-					{
-						education.map((item) => (
-							<div class="stack">
-								<strong>{item.degree}</strong>
-								<p class="meta">{item.school} · {item.detail}</p>
-								<p>{item.fields}</p>
-							</div>
-						))
-					}
-				</div>
-				<div class="card">
-					<h3>Languages</h3>
-					<ul class="plain-list">
-						{languages.map((item) => <li><strong>{item.name}</strong> - {item.level}</li>)}
-					</ul>
-				</div>
-				<div class="card">
-					<h3>Interests</h3>
-					<ul>
-						{interests.map((item) => <li>{item}</li>)}
-					</ul>
-				</div>
+			<div class="section-head">
+				<h2 class="section-title">Selected work</h2>
+				<a href="/projects/">All {projects.length} projects →</a>
 			</div>
-		</div>
-	</section>
-
-	<section id="experience">
-		<div class="wrap">
-			<h2 class="section-title">Experience & leadership</h2>
-			<ol class="timeline">
+			<div class="work-grid">
 				{
-					experience.map((job) => (
+					featured.map((project) => (
+						<article class="card">
+							{project.image && (
+								<figure>
+									<Image src={project.image} alt={project.imageAlt ?? project.title} widths={[480, 720, 960]} sizes="(min-width: 48rem) 34rem, 100vw" />
+								</figure>
+							)}
+							<div class="card-body">
+								<p class="meta">{[project.org, project.period].filter(Boolean).join(" · ")}</p>
+								<h3>{project.href ? <a href={project.href} rel="noopener">{project.title}</a> : project.title}</h3>
+								<p>{project.blurb}</p>
+								<ul class="tags">
+									{project.tags.map((tag) => (
+										<li>{tag}</li>
+									))}
+								</ul>
+							</div>
+						</article>
+					))
+				}
+			</div>
+			<ol class="index-list">
+				{
+					rest.map((project) => (
 						<li>
-							<p class="period">{job.period}</p>
-							<h3>{job.role}</h3>
-							<p class="org">{job.org}{job.location ? ` · ${job.location}` : ""}</p>
-							<p>{job.summary}</p>
+							<span class="period">{project.period?.split(" - ").pop() ?? "—"}</span>
+							<div>
+								<h3>{project.href ? <a href={project.href} rel="noopener">{project.title}</a> : project.title}</h3>
+								{project.org && <p class="org">{project.org}</p>}
+							</div>
+							<ul class="tags">
+								{project.tags.slice(0, 3).map((tag) => (
+									<li>{tag}</li>
+								))}
+							</ul>
 						</li>
 					))
 				}
@@ -80,35 +115,111 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 		</div>
 	</section>
 
+	<section id="experience">
+		<div class="wrap">
+			<div class="section-head">
+				<h2 class="section-title">Experience</h2>
+			</div>
+			<ol class="ledger">
+				{
+					experience.map((job) => (
+						<li>
+							<p class="period">{job.period}</p>
+							<div>
+								<h3>{job.role}</h3>
+								<p class="org">
+									<strong>{job.org}</strong>
+									{job.location ? ` · ${job.location}` : ""}
+								</p>
+								<p>{job.summary}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<section id="about">
+		<div class="wrap split">
+			<div>
+				<div class="section-head">
+					<h2 class="section-title">About</h2>
+				</div>
+				<div class="prose">
+					<p>
+						I work at the seam between hardware and software: ROS navigation stacks, vision models
+						quantized for a Raspberry Pi, CAD for the parts that hold them together. Most of my
+						projects start as a physical problem, like picking a strawberry or docking a robot, and
+						end as a system that has been calibrated, tested, and made to work in the real world.
+					</p>
+					<p>
+						Alongside engineering I have led student organisations, taught lab courses, and run
+						esports tournaments for eighty-plus teams. I speak Indonesian, English, and enough
+						Japanese and Mandarin to get by.
+					</p>
+				</div>
+			</div>
+			<dl class="facts-list">
+				<div>
+					<dt>Education</dt>
+					{
+						education.map((item) => (
+							<dd>
+								{item.degree}
+								<span class="meta">
+									{item.school} · {item.detail}
+								</span>
+							</dd>
+						))
+					}
+				</div>
+				<div>
+					<dt>Languages</dt>
+					{
+						languages.map((item) => (
+							<dd>
+								{item.name} <span class="meta">{item.level}</span>
+							</dd>
+						))
+					}
+				</div>
+				<div>
+					<dt>Certifications</dt>
+					{
+						certifications.map((cert) => (
+							<dd>
+								{cert.name}
+								<span class="meta">
+									{cert.issuer} · {cert.date}
+								</span>
+							</dd>
+						))
+					}
+				</div>
+			</dl>
+		</div>
+	</section>
+
 	<section id="skills">
 		<div class="wrap">
-			<h2 class="section-title">Skills</h2>
-			<div class="grid grid-pairs">
+			<div class="section-head">
+				<h2 class="section-title">Skills</h2>
+			</div>
+			<ul class="skill-rows">
 				{
 					skills.map((group) => (
-						<div class="card">
+						<li>
 							<h3>{group.group}</h3>
-							<ul>
+							<ul class="tags">
 								{group.items.map((item) => (
 									<li>{item}</li>
 								))}
 							</ul>
-						</div>
+						</li>
 					))
 				}
-			</div>
-
-			<h3 class="subhead">Certifications</h3>
-			<div class="grid grid-pairs">
-				{
-					certifications.map((cert) => (
-						<div class="card">
-							<strong>{cert.name}</strong>
-							<p class="meta">{cert.issuer} · {cert.date}</p>
-						</div>
-					))
-				}
-			</div>
+			</ul>
 		</div>
 	</section>
 
@@ -116,7 +227,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 		posts.length > 0 && (
 			<section id="writing">
 				<div class="wrap">
-					<h2 class="section-title">Writing</h2>
+					<div class="section-head">
+						<h2 class="section-title">Writing</h2>
+						<a href="/blog/">All posts →</a>
+					</div>
 					<ul class="post-list">
 						{posts.map((post) => (
 							<li>
@@ -130,24 +244,21 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 							</li>
 						))}
 					</ul>
-					<p style="margin-top: 2rem;">
-						<a href="/blog/">All posts →</a>
-					</p>
 				</div>
 			</section>
 		)
 	}
 
-	<section id="contact">
+	<section id="contact" class="contact">
 		<div class="wrap">
-			<h2 class="section-title">Contact</h2>
-			<p class="prose">
-				Open to opportunities in robotics, automation, and applied machine learning.
+			<p class="eyebrow">Contact</p>
+			<h2>Open to robotics, automation, and applied ML work.</h2>
+			<p>Internships, research positions, and collaborations. Reply within a day or two.</p>
+			<a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+			<p class="hero-links">
+				<a href={site.github} rel="me noopener">GitHub</a>
+				<a href={site.linkedin} rel="me noopener">LinkedIn</a>
 			</p>
-			<ul class="plain-list" style="margin-top: 1rem;">
-				<li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-				<li>{site.location}</li>
-			</ul>
 		</div>
 	</section>
 </Base>
