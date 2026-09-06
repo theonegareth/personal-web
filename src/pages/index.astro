@@ -3,13 +3,14 @@ import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { site, projects, experience, education, skills, languages, certifications } from "../data/site";
 import { getCollection } from "astro:content";
+import strawberryArm from "../assets/projects/strawberry-arm.jpg";
+import portrait from "../assets/gareth.jpg";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
 
 const featured = projects.filter((p) => p.featured);
-const hero = featured[0];
 const rest = projects.filter((p) => !p.featured);
 ---
 
@@ -32,16 +33,10 @@ const rest = projects.filter((p) => !p.featured);
 					</p>
 				</div>
 			</div>
-			{
-				hero?.image && (
-					<figure class="hero-figure">
-						<Image src={hero.image} alt={hero.imageAlt ?? hero.title} widths={[480, 720, 960]} sizes="(min-width: 56rem) 34rem, 100vw" loading="eager" />
-						<figcaption>
-							{hero.title} — {hero.org}
-						</figcaption>
-					</figure>
-				)
-			}
+			<figure class="hero-figure">
+				<Image src={strawberryArm} alt="SolidWorks render of the strawberry-picking robotic arm with its slotted basket end effector" widths={[480, 720, 960]} sizes="(min-width: 56rem) 34rem, 100vw" loading="eager" />
+				<figcaption>Strawberry-picking arm, SolidWorks assembly — BINUS ASO School of Engineering</figcaption>
+			</figure>
 		</div>
 		<div class="wrap">
 			<dl class="facts">
@@ -146,6 +141,7 @@ const rest = projects.filter((p) => !p.featured);
 				<div class="section-head">
 					<h2 class="section-title">About</h2>
 				</div>
+				<Image class="portrait" src={portrait} alt="Gareth Aurelius Harrison" widths={[240, 480]} sizes="15rem" />
 				<div class="prose">
 					<p>
 						I work at the seam between hardware and software: ROS navigation stacks, vision models

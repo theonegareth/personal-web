@@ -1,7 +1,15 @@
-import strawberryArm from "../assets/projects/strawberry-arm.jpg";
+import turtlebotArena from "../assets/projects/turtlebot-arena.png";
+import strawberryPrototype from "../assets/projects/strawberry-prototype.png";
+import indohoaxApp from "../assets/projects/indohoax-app.png";
+import hayabusa from "../assets/projects/hayabusa.jpg";
+import karasu from "../assets/projects/karasu.jpg";
+import krtiGazebo from "../assets/projects/krti-gazebo.jpg";
 import plantesaLeaf from "../assets/projects/plantesa-leaf.jpg";
+import depressionWaveform from "../assets/projects/depression-waveform.png";
 import goldPrice from "../assets/projects/gold-price.png";
-import turtlebotRaspicam from "../assets/projects/turtlebot-raspicam.png";
+import shredderSlump from "../assets/projects/shredder-slump.jpg";
+import smartParking from "../assets/projects/smart-parking.png";
+import fishFeeder from "../assets/projects/fish-feeder.png";
 
 export const site = {
 	name: "Gareth Aurelius Harrison",
@@ -26,6 +34,7 @@ export type Project = {
 	hrefLabel?: string;
 	image?: ImageMetadata;
 	imageAlt?: string;
+	contain?: boolean;
 	featured?: boolean;
 };
 
@@ -42,8 +51,9 @@ export const projects: Project[] = [
 			"Ran intrinsic camera calibration for a Raspberry Pi Camera V2 and designed a tiered landmark system to mitigate long-term dead-reckoning drift.",
 		],
 		href: "https://github.com/theonegareth/turtlebot-toyohashi",
-		image: turtlebotRaspicam,
-		imageAlt: "rqt dynamic reconfigure panel tuning the Raspberry Pi camera node on the TurtleBot",
+		image: turtlebotArena,
+		imageAlt: "TurtleBot in the test arena at Toyohashi, surrounded by cones and boxes carrying AprilTag landmarks",
+		featured: true,
 	},
 	{
 		title: "Strawberry Picking Robotic Arm",
@@ -57,8 +67,8 @@ export const projects: Project[] = [
 			"Quantized the model to INT8 TensorFlow Lite for Raspberry Pi 4B deployment, targeting 20-30 FPS.",
 		],
 		href: "https://github.com/theonegareth/strawberryPicker",
-		image: strawberryArm,
-		imageAlt: "SolidWorks render of the strawberry-picking robotic arm with its slotted basket end effector",
+		image: strawberryPrototype,
+		imageAlt: "3D-printed strawberry-picking arm prototype on the bench, reaching for strawberries beside a laptop",
 		featured: true,
 	},
 	{
@@ -74,6 +84,8 @@ export const projects: Project[] = [
 		],
 		href: "https://huggingface.co/spaces/theonegareth/IndoHoaxDetector",
 		hrefLabel: "Live demo",
+		image: indohoaxApp,
+		imageAlt: "IndoHoaxDetector running on Hugging Face Spaces, classifying a pasted Indonesian article as HOAX",
 	},
 	{
 		title: "HAYABUSA, KRTI 2025",
@@ -85,6 +97,9 @@ export const projects: Project[] = [
 			"Developed and integrated drone simulation environments in Gazebo using ROS for flight control and mission testing.",
 			"Built and tested object detection models for drone perception, improving target recognition accuracy in simulation.",
 		],
+		image: hayabusa,
+		imageAlt: "Two AeroBASE members holding the HAYABUSA drone up outdoors",
+		featured: true,
 	},
 	{
 		title: "KARASU (カラス), KRTI 2024",
@@ -96,6 +111,8 @@ export const projects: Project[] = [
 			"Debugged and optimized ROS packages controlling UAV navigation, sensor data, and communication modules.",
 			"Conducted multiple flight trials validating obstacle avoidance and autonomous decision-making, improving stability and responsiveness.",
 		],
+		image: karasu,
+		imageAlt: "The KARASU quadcopter on an outdoor court during a flight trial",
 	},
 	{
 		title: "KRTI 2025 Gazebo Simulation Assets",
@@ -107,6 +124,8 @@ export const projects: Project[] = [
 			"Built a Gazebo Sim world for visual and physics-based flight testing.",
 		],
 		href: "https://github.com/theonegareth/GZassets",
+		image: krtiGazebo,
+		imageAlt: "Gazebo simulation of the KRTI 2025 drone on the ground plane with the entity tree open",
 	},
 	{
 		title: "PLANTESA: IoT & ML Plant Incubation System",
@@ -135,6 +154,9 @@ export const projects: Project[] = [
 			"Preprocessed audio with noise reduction, segmentation, and normalization for consistency.",
 			"Extracted MFCC features capturing pitch, tone, and rhythm variation linked to depressive speech, then trained the SVM classifier.",
 		],
+		image: depressionWaveform,
+		imageAlt: "Raw waveform of a happy-voice recording plotted in MATLAB",
+		contain: true,
 	},
 	{
 		title: "Gold Price Prediction Models",
@@ -148,6 +170,7 @@ export const projects: Project[] = [
 		href: "https://github.com/theonegareth/GoldPricePredictor",
 		image: goldPrice,
 		imageAlt: "Line chart of Antam gold price in IDR from 2010 to 2026",
+		contain: true,
 	},
 	{
 		title: "Plastic Shredder & Vibration Mixer",
@@ -161,6 +184,8 @@ export const projects: Project[] = [
 			"Formulated and tested cement mixtures with varying plastic content for strength, durability, and production feasibility.",
 			"Carried out with Johan Kim and Stivan Delon Sahertian.",
 		],
+		image: shredderSlump,
+		imageAlt: "Rebound hammer test on a cured cement block with plastic content",
 	},
 	{
 		title: "SMART Parking System",
@@ -173,6 +198,8 @@ export const projects: Project[] = [
 			"Tested circuit performance across operating conditions to verify reliability.",
 			"Optimized and implemented the final design for stable operation.",
 		],
+		image: smartParking,
+		imageAlt: "SMART Parking System model with toy cars in the bays and the ultrasonic barrier post",
 	},
 	{
 		title: "Automatic Fish Feeding System",
@@ -186,6 +213,8 @@ export const projects: Project[] = [
 			"Assembled and tested the system for reliable distribution in aquarium conditions.",
 		],
 		href: "https://github.com/theonegareth/SMARTFishFeeder",
+		image: fishFeeder,
+		imageAlt: "Automatic fish feeder unit with its LCD lit, mounted beside the aquarium",
 	},
 ];
 

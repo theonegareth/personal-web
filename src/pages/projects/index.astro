@@ -2,9 +2,6 @@
 import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
 import { projects } from "../../data/site";
-
-// Charts and UI screenshots have their own aspect ratio; crop only photographs and renders.
-const contain = (project: (typeof projects)[number]) => project.image?.format === "png";
 ---
 
 <Base
@@ -22,7 +19,7 @@ const contain = (project: (typeof projects)[number]) => project.image?.format ==
 					projects.map((project) => (
 						<article class="card">
 							{project.image && (
-								<figure class:list={{ contain: contain(project) }}>
+								<figure class:list={{ contain: project.contain }}>
 									<Image src={project.image} alt={project.imageAlt ?? project.title} widths={[480, 720]} sizes="(min-width: 48rem) 22rem, 100vw" />
 								</figure>
 							)}
