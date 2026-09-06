@@ -93,6 +93,8 @@ Site content lives in two places, both plain data — no code changes needed to 
 
 `src/data/site.ts` holds contact details, projects, experience, education, skills, certifications, and interests as typed exports. Pages map over these arrays, so adding a project means adding an object to `projects`.
 
+Project photos live in `src/assets/projects/` and are imported at the top of `site.ts`, then attached to a project through its `image` and `imageAlt` fields. Astro resizes and converts them to WebP at build time. Set `featured: true` to show the project on the home page, and `contain: true` for charts and other images that must not be cropped to the card's aspect ratio. The portrait in the About section is `src/assets/gareth.jpg`.
+
 `src/content/blog/` holds one Markdown file per post. Frontmatter is validated against the schema in `src/content.config.ts`:
 
 | Field | Required | Default | Description |
@@ -108,14 +110,13 @@ The URL slug comes from the filename: `src/content/blog/my-post.md` becomes `/bl
 
 ## Deployment
 
-Cloudflare Pages, connected to this repository. Pushing to `main` triggers a build.
+Cloudflare Pages, as a direct-upload project named `personal-web`. It is not connected to this repository: pushing to `main` deploys nothing. Ship a change with
 
-| Setting | Value |
-|---|---|
-| Framework preset | Astro |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
-| Node version | 22 or newer |
+```sh
+npm run deploy
+```
+
+which builds to `dist/` and uploads it with Wrangler. The script reads `CLOUDFLARE_API_TOKEN_PERSONAL` and `CLOUDFLARE_ACCOUNT_ID_PERSONAL` from `~/.env`; the token needs Pages edit permission on the account, nothing more.
 
 The canonical hostname is set by `site` in `astro.config.mjs`. It feeds the generated sitemap, the `<link rel="canonical">` tag, and Open Graph URLs — change it there, not in individual pages. `public/robots.txt` points crawlers at `/sitemap-index.xml` and must be updated alongside it if the hostname changes.
 
