@@ -624,6 +624,29 @@ section + section {
 	margin: 0 0 1.25rem;
 }
 
+.prose table {
+	display: block;
+	overflow-x: auto;
+	border-collapse: collapse;
+	margin: 0 0 1.5rem;
+	font-size: 0.9rem;
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
+}
+
+.prose th,
+.prose td {
+	text-align: left;
+	padding: 0.5rem 1.25rem 0.5rem 0;
+	border-bottom: 1px solid var(--border);
+}
+
+.prose th {
+	font-weight: 500;
+	color: var(--fg-muted);
+	font-size: 0.8rem;
+}
+
 .prose blockquote {
 	margin: 0 0 1.25rem;
 	padding-left: 1rem;
