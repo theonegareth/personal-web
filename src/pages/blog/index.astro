@@ -10,7 +10,9 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 <Base title="Blog" description="Notes on robotics, drones, machine learning and embedded systems.">
 	<section>
 		<div class="wrap">
-			<h2 class="section-title">Blog</h2>
+			<div class="section-head">
+				<h2 class="section-title">Blog</h2>
+			</div>
 			{
 				posts.length === 0 ? (
 					<p>Nothing published yet.</p>
