@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { site, projects, experience, education, skills, languages, certifications } from "../data/site";
+import { openData } from "../data/opendata";
 import { getCollection } from "astro:content";
 import strawberryArm from "../assets/projects/strawberry-arm.jpg";
 import portrait from "../assets/gareth.jpg";
@@ -9,6 +10,8 @@ import portrait from "../assets/gareth.jpg";
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 	.slice(0, 3);
+
+const fmt = (n: number) => n.toLocaleString("en-GB");
 
 const featured = projects.filter((p) => p.featured);
 const rest = projects.filter((p) => !p.featured);
@@ -29,6 +32,8 @@ const rest = projects.filter((p) => !p.featured);
 					<p class="hero-links">
 						<a href={site.github} rel="me noopener">GitHub</a>
 						<a href={site.linkedin} rel="me noopener">LinkedIn</a>
+						<a href={site.huggingface} rel="me noopener">Hugging Face</a>
+						<a href={site.kaggle} rel="me noopener">Kaggle</a>
 						<a href={`mailto:${site.email}`}>Email</a>
 					</p>
 				</div>
@@ -220,6 +225,78 @@ const rest = projects.filter((p) => !p.featured);
 	</section>
 
 	{
+		openData && (
+			<section id="open-source">
+				<div class="wrap">
+					<div class="section-head">
+						<h2 class="section-title">Models &amp; datasets</h2>
+						<span>Published on Hugging Face and Kaggle</span>
+					</div>
+					<dl class="facts hf-facts">
+						<div>
+							<dt>Downloads, all time</dt>
+							<dd>{fmt(openData.downloads)}</dd>
+						</div>
+						<div>
+							<dt>Downloads, last 30 days</dt>
+							<dd>{`${fmt(openData.downloadsRecent)} on Hugging Face`}</dd>
+						</div>
+						<div>
+							<dt>Dataset page views</dt>
+							<dd>{`${fmt(openData.views)} on Kaggle`}</dd>
+						</div>
+						<div>
+							<dt>Likes and upvotes</dt>
+							<dd>{fmt(openData.votes)}</dd>
+						</div>
+					</dl>
+					{openData.platforms.map((platform) => (
+						<div class="platform">
+							<h3 class="platform-name">
+								<a href={platform.url} rel="me noopener">
+									{platform.name} →
+								</a>
+								<span>{`${fmt(platform.repos.reduce((total, repo) => total + (repo.downloads ?? 0), 0))} downloads across ${platform.repos.length} repositories`}</span>
+							</h3>
+							<ol class="index-list">
+								{platform.repos.map((repo) => (
+									<li>
+										<span class="period">
+											{repo.downloads === null ? "—" : `${fmt(repo.downloads)} ↓`}
+										</span>
+										<div>
+											<h3>
+												<a href={repo.url} rel="noopener">
+													{repo.name}
+												</a>
+											</h3>
+											<p class="org">
+												{`${repo.kind} · updated ${repo.updated.toLocaleDateString("en-GB", { dateStyle: "medium" })}`}
+											</p>
+										</div>
+										<ul class="tags">
+											{repo.views ? <li>{fmt(repo.views)} views</li> : null}
+											{repo.downloadsRecent ? <li>{fmt(repo.downloadsRecent)} in 30d</li> : null}
+											{repo.votes ? <li>{repo.votes} ♥</li> : null}
+										</ul>
+									</li>
+								))}
+							</ol>
+						</div>
+					))}
+					<p class="hf-note">
+						Read from the Hugging Face and Kaggle APIs at build time on{" "}
+						<time datetime={openData.fetched.toISOString()}>
+							{openData.fetched.toLocaleDateString("en-GB", { dateStyle: "long" })}
+						</time>
+						.
+					</p>
+				</div>
+			</section>
+		)
+	}
+
+	{
 		posts.length > 0 && (
 			<section id="writing">
 				<div class="wrap">
@@ -254,6 +331,8 @@ const rest = projects.filter((p) => !p.featured);
 			<p class="hero-links">
 				<a href={site.github} rel="me noopener">GitHub</a>
 				<a href={site.linkedin} rel="me noopener">LinkedIn</a>
+				<a href={site.huggingface} rel="me noopener">Hugging Face</a>
+				<a href={site.kaggle} rel="me noopener">Kaggle</a>
 			</p>
 		</div>
 	</section>

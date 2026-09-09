@@ -20,6 +20,8 @@ export const site = {
 	email: "gareth.harrison@binus.ac.id",
 	github: "https://github.com/theonegareth",
 	linkedin: "https://www.linkedin.com/in/theonegareth/",
+	huggingface: "https://huggingface.co/theonegareth",
+	kaggle: "https://www.kaggle.com/garethharrison",
 	url: "https://theonegareth.com",
 };
 
