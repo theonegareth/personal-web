@@ -10,6 +10,7 @@ import goldPrice from "../assets/projects/gold-price.png";
 import shredderSlump from "../assets/projects/shredder-slump.jpg";
 import smartParking from "../assets/projects/smart-parking.png";
 import fishFeeder from "../assets/projects/fish-feeder.png";
+import datasetsChart from "../assets/projects/datasets.png";
 
 export const site = {
 	name: "Gareth Aurelius Harrison",
@@ -158,6 +159,22 @@ export const projects: Project[] = [
 		],
 		image: depressionWaveform,
 		imageAlt: "Raw waveform of a happy-voice recording plotted in MATLAB",
+		contain: true,
+	},
+	{
+		title: "Indonesian Financial Market Datasets",
+		period: "Nov 2025 - present",
+		blurb: "Three open time-series datasets on Indonesian markets - the IHSG composite index, USD/IDR exchange rates, and Antam gold prices - published in parallel on Hugging Face and Kaggle and refreshed daily by an automated pipeline. Around 19,000 rows in total, all MIT-licensed.",
+		tags: ["Data Engineering", "Python", "ETL", "Hugging Face", "Kaggle"],
+		points: [
+			"Built a stateless daily ETL job that pulls the current CSVs from Hugging Face, appends new market rows from Yahoo Finance, and pushes identical files to both platforms, no-opping on market-closed days.",
+			"Routed the fetch through a SOCKS5 tunnel to a residential egress host after the data provider blocked the hosting VPS, with three retries before giving up.",
+			"Made the job fail loudly rather than degrade, after a silently partial run lost a full trading day, and added a stats collector tracking per-dataset downloads and views over time.",
+		],
+		href: "https://huggingface.co/theonegareth/datasets",
+		hrefLabel: "Datasets",
+		image: datasetsChart,
+		imageAlt: "Three line charts side by side: the IHSG composite index from 1995, the USD/IDR exchange rate from 2001, and the Antam gold price per gram from 2010",
 		contain: true,
 	},
 	{
