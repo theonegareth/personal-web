@@ -84,6 +84,7 @@ export const projects: Project[] = [
 			"Built an Indonesian text normalization pipeline over 62,972 samples using regex and the Sastrawi stemmer, cutting vocabulary by 63.6% to 45,678 terms and average document length from 312 to 156 words.",
 			"Benchmarked Logistic Regression, Naive Bayes, Random Forest, SVM and IndoBERT under stratified 5-fold cross-validation with hyperparameter grid sweeps.",
 			"Audited error distributions and feature coefficients, then serialized the pipeline with joblib and deployed it to Hugging Face Spaces.",
+			"Presented as \"IndoHoaxDetector: A Comparative Evaluation of Classical Machine Learning and IndoBERT for Indonesian Mixed Corpus Hoax Detection\" at ICDEES 2026 (paper 1571356220), with Seline Loewel and Enrico Ethan, supervised by Benedictus Rahardjo.",
 		],
 		href: "https://huggingface.co/spaces/theonegareth/IndoHoaxDetector",
 		hrefLabel: "Live demo",
@@ -247,11 +248,23 @@ export type Job = {
 
 export const experience: Job[] = [
 	{
+		period: "Aug 2026 - present",
+		role: "Software Engineering Intern (Pelajarin AI Division)",
+		org: "PT Dewaweb",
+		summary: "Builds and runs production software for Pelajarin AI and Dewaweb: the Pelajarin help centre and support desk, the landing site, and marketplace data acquisition (Dewastore, now part of Atlas). Formal BINUS internship placement.",
+	},
+	{
+		period: "Jul 2026 - present",
+		role: "Member of Technical Staff",
+		org: "Nutrisi AI",
+		summary: "Trains and benchmarks the food detection and nutrition estimation models behind Nutrisi AI, including evaluation against weighed reference meals and prompt A/B testing.",
+	},
+	{
 		period: "Mar 2026 - May 2026",
 		role: "Laboratory Assistant",
-		org: "Toyohashi University of Technology (豊橋技術科学大学)",
+		org: "Toyohashi University of Technology (豊橋技術科学大学), Uchiyama Laboratory",
 		location: "Toyohashi, Aichi, Japan",
-		summary: "Research and lab assistance on autonomous mobile robot navigation and precision visual alignment. Achieved sub-centimeter docking precision (0.4 mm error at 15 cm staging range) through custom intrinsic camera calibration and a proportional control algorithm, and engineered a reactive state machine for perimeter exploration using windowed LiDAR data.",
+		summary: "Short-Term Visiting International Students program. Research and lab assistance on autonomous mobile robot navigation and precision visual alignment. Achieved sub-centimeter docking precision (0.4 mm error at 15 cm staging range) through custom intrinsic camera calibration and a proportional control algorithm, and engineered a reactive state machine for perimeter exploration using windowed LiDAR data.",
 	},
 	{
 		period: "Sep 2025 - Jan 2026",
