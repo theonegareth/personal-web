@@ -5,13 +5,30 @@ import "../styles/global.css";
 type Props = {
 	title?: string;
 	description?: string;
+	ogType?: "website" | "article";
+	jsonLd?: Record<string, unknown>;
 };
 
-const { title, description = site.tagline } = Astro.props;
+const { title, description = site.tagline, ogType = "website", jsonLd } = Astro.props;
 const pageTitle = title ? `${title} - ${site.shortName}` : `${site.shortName} - Robotics & Automation`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site ?? site.url).href;
 const ogImage = new URL("/og.png", Astro.site ?? site.url).href;
+
+const person = {
+	"@type": "Person",
+	"@id": `${site.url}/#person`,
+	name: site.name,
+	alternateName: site.shortName,
+	url: site.url,
+	image: new URL("/og.png", site.url).href,
+	jobTitle: site.role,
+	description: site.tagline,
+	email: `mailto:${site.email}`,
+	address: { "@type": "PostalAddress", addressLocality: "West Jakarta", addressCountry: "ID" },
+	sameAs: [site.github, site.linkedin, site.huggingface, site.kaggle],
+};
+const ld = { "@context": "https://schema.org", "@graph": [person, ...(jsonLd ? [jsonLd] : [])] };
 
 const nav = [
 	{ href: "/", label: "Home" },
@@ -31,7 +48,7 @@ const nav = [
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
@@ -42,6 +59,7 @@ const nav = [
 		<meta property="og:image:alt" content={`${site.name} - ${site.role}`} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:image" content={ogImage} />
+		<script type="application/ld+json" set:html={JSON.stringify(ld)} />
 	</head>
 	<body>
 		<a class="skip-link" href="#main">Skip to content</a>

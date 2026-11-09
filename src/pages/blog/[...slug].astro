@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import { site } from "../../data/site";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -11,9 +12,17 @@ type Props = { post: CollectionEntry<"blog"> };
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const jsonLd = {
+	"@type": "BlogPosting",
+	headline: post.data.title,
+	description: post.data.description,
+	datePublished: post.data.date.toISOString(),
+	url: new URL(Astro.url.pathname, Astro.site).href,
+	author: { "@id": `${site.url}/#person` },
+};
 ---
 
-<Base title={post.data.title} description={post.data.description}>
+<Base title={post.data.title} description={post.data.description} ogType="article" jsonLd={jsonLd}>
 	<section>
 		<div class="wrap">
 			<article class="prose">

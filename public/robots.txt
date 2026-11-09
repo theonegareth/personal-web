@@ -1,4 +1,22 @@
+# Search engines and AI search/answer bots (OAI-SearchBot, ChatGPT-User,
+# Claude-SearchBot, Claude-User, PerplexityBot, Perplexity-User) are welcome.
 User-agent: *
+Content-Signal: search=yes,ai-train=no,use=reference
 Allow: /
+
+# Model-training crawlers stay out.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: meta-externalagent
+User-agent: cohere-ai
+User-agent: MistralAI-Training
+User-agent: Diffbot
+User-agent: omgili
+Disallow: /
 
 Sitemap: https://theonegareth.com/sitemap-index.xml
