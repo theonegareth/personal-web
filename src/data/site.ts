@@ -54,7 +54,7 @@ export const projects: Project[] = [
 		tags: ["ROS Noetic", "Python", "Visual Servoing", "LiDAR SLAM", "AprilTag"],
 		points: [
 			"Architected a reactive state machine for autonomous perimeter exploration, using windowed LiDAR data for dynamic obstacle evasion and trap recovery.",
-			"Engineered a custom visual-servoing controller for final docking, reaching 0.4 mm error at a 15 cm staging range and bypassing the limits of the standard ROS navigation stack.",
+			"Engineered a custom visual-servoing controller for the final docking approach, bypassing the limits of the standard ROS navigation stack; after camera calibration, AprilTag distance estimates were within 0.4 mm at 15 cm (0.26%) and 4 mm at 30 cm.",
 			"Ran intrinsic camera calibration for a Raspberry Pi Camera V2 and designed a tiered landmark system to mitigate long-term dead-reckoning drift.",
 		],
 		href: "https://github.com/theonegareth/turtlebot-toyohashi",
@@ -268,7 +268,7 @@ export const experience: Job[] = [
 		role: "Laboratory Assistant",
 		org: "Toyohashi University of Technology (豊橋技術科学大学), Uchiyama Laboratory",
 		location: "Toyohashi, Aichi, Japan",
-		summary: "Short-Term Visiting International Students program. Research and lab assistance on autonomous mobile robot navigation and precision visual alignment. Achieved sub-centimeter docking precision (0.4 mm error at 15 cm staging range) through custom intrinsic camera calibration and a proportional control algorithm, and engineered a reactive state machine for perimeter exploration using windowed LiDAR data.",
+		summary: "Short-Term Visiting International Students program. Research and lab assistance on autonomous mobile robot navigation and precision visual alignment. Team project with Brevan Anthony. Calibrated the camera so AprilTag distance estimates fell within 0.4 mm at 15 cm and 4 mm at 30 cm, built a proportional visual-servoing controller for docking, and engineered a reactive state machine for perimeter exploration using windowed LiDAR data.",
 	},
 	{
 		period: "Sep 2025 - Jan 2026",
