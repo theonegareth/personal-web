@@ -41,6 +41,10 @@ export type Project = {
 	featured?: boolean;
 };
 
+// ponytail: slug comes from the title, so renaming a project changes its URL; add a slug field if that ever matters
+export const projectSlug = (project: Project) =>
+	project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export const projects: Project[] = [
 	{
 		title: "TurtleBot Autonomous Navigation",

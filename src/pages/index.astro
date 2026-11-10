@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import { site, projects, experience, education, skills, languages, certifications } from "../data/site";
+import { site, projects, projectSlug, experience, education, skills, languages, certifications } from "../data/site";
 import { openData } from "../data/opendata";
 import { getCollection } from "astro:content";
 import strawberryArm from "../assets/projects/strawberry-arm.jpg";
@@ -82,7 +82,7 @@ const rest = projects.filter((p) => !p.featured);
 							)}
 							<div class="card-body">
 								<p class="meta">{[project.org, project.period].filter(Boolean).join(" · ")}</p>
-								<h3>{project.href ? <a href={project.href} rel="noopener">{project.title}</a> : project.title}</h3>
+								<h3><a href={`/projects/${projectSlug(project)}/`}>{project.title}</a></h3>
 								<p>{project.blurb}</p>
 								<ul class="tags">
 									{project.tags.map((tag) => (
@@ -100,7 +100,7 @@ const rest = projects.filter((p) => !p.featured);
 						<li>
 							<span class="period">{project.period?.split(" - ").pop() ?? "—"}</span>
 							<div>
-								<h3>{project.href ? <a href={project.href} rel="noopener">{project.title}</a> : project.title}</h3>
+								<h3><a href={`/projects/${projectSlug(project)}/`}>{project.title}</a></h3>
 								{project.org && <p class="org">{project.org}</p>}
 							</div>
 							<ul class="tags">

@@ -1,0 +1,58 @@
+---
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { site, projects, projectSlug, type Project } from "../../data/site";
+
+export function getStaticPaths() {
+	return projects.map((project) => ({ params: { slug: projectSlug(project) }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const url = new URL(Astro.url.pathname, site.url).href;
+const jsonLd = {
+	"@type": "CreativeWork",
+	name: project.title,
+	description: project.blurb,
+	url,
+	author: { "@id": `${site.url}/#person` },
+	keywords: project.tags.join(", "),
+	...(project.period && { temporalCoverage: project.period }),
+	...(project.org && { sourceOrganization: { "@type": "Organization", name: project.org } }),
+	...(project.href && { sameAs: project.href }),
+};
+---
+
+<Base title={project.title} description={project.blurb} ogType="article" jsonLd={jsonLd}>
+	<section>
+		<div class="wrap">
+			<article class="prose">
+				<p class="meta">{[project.org, project.period].filter(Boolean).join(" · ")}</p>
+				<h1>{project.title}</h1>
+				<p>By <a href="/">{site.name}</a></p>
+				{
+					project.image && (
+						<figure class="project-figure">
+							<Image src={project.image} alt={project.imageAlt ?? project.title} widths={[720, 1080]} sizes="(min-width: 48rem) 62ch, 100vw" loading="eager" />
+						</figure>
+					)
+				}
+				<p>{project.blurb}</p>
+				<h2>What I did</h2>
+				<ul>
+					{project.points.map((point) => <li>{point}</li>)}
+				</ul>
+				<ul class="tags">
+					{project.tags.map((tag) => <li>{tag}</li>)}
+				</ul>
+				{
+					project.href && (
+						<p>
+							<a href={project.href} rel="noopener">{project.hrefLabel ?? "Repository"} →</a>
+						</p>
+					)
+				}
+			</article>
+			<p style="margin-top: 3rem;"><a href="/projects/">← All projects</a></p>
+		</div>
+	</section>
+</Base>

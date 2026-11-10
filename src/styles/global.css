@@ -834,3 +834,15 @@ section + section {
 		scroll-behavior: auto;
 	}
 }
+
+.project-figure {
+	margin: 0 0 2rem;
+	background: var(--surface-2);
+	border: 1px solid var(--border);
+}
+
+.project-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+}

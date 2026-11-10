@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
-import { projects } from "../../data/site";
+import { projects, projectSlug } from "../../data/site";
 ---
 
 <Base
@@ -27,7 +27,7 @@ import { projects } from "../../data/site";
 								{(project.org || project.period) && (
 									<p class="meta">{[project.org, project.period].filter(Boolean).join(" · ")}</p>
 								)}
-								<h3>{project.title}</h3>
+								<h3><a href={`/projects/${projectSlug(project)}/`}>{project.title}</a></h3>
 								<p>{project.blurb}</p>
 								<details>
 									<summary>What I did</summary>
