@@ -13,6 +13,7 @@
     "deploy": "astro build && . \"$HOME/.env\" && CLOUDFLARE_API_TOKEN=\"$CLOUDFLARE_API_TOKEN_PERSONAL\" CLOUDFLARE_ACCOUNT_ID=\"$CLOUDFLARE_ACCOUNT_ID_PERSONAL\" wrangler pages deploy dist --project-name personal-web --branch main --commit-dirty=true"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.4.11",
     "zod": "^4.4.3"
