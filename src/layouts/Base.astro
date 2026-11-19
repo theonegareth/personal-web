@@ -10,7 +10,7 @@ type Props = {
 };
 
 const { title, description = site.tagline, ogType = "website", jsonLd } = Astro.props;
-const pageTitle = title ? `${title} - ${site.shortName}` : `${site.shortName} - Robotics & Automation`;
+const pageTitle = title ? `${title} - ${site.name}` : `${site.name} - Robotics & Automation`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site ?? site.url).href;
 const ogImage = new URL("/og.png", Astro.site ?? site.url).href;
@@ -66,7 +66,7 @@ const nav = [
 		<a class="skip-link" href="#main">Skip to content</a>
 		<header class="site-header">
 			<div class="wrap">
-				<a class="brand" href="/">{site.shortName}</a>
+				<a class="brand" href="/">{site.name}</a>
 				<nav class="site-nav" aria-label="Main">
 					{
 						nav.map((item) => (
