@@ -120,9 +120,8 @@ export const projects: Project[] = [
 		org: "BINUS ASO School of Engineering (AeroBASE)",
 		period: "Mar 2024 - Oct 2024",
 		blurb: "AeroBASE's second-generation UAV for aerial surveillance and image capture, and the team's debut entry in the Kontes Robot Terbang Indonesia. The team's first end-to-end effort across airframe design, software integration, and flight testing.",
-		tags: ["ROS", "UAV", "Flight Testing"],
+		tags: ["DroneKit", "ArduPilot", "UAV", "Flight Testing"],
 		points: [
-			"Debugged and optimized ROS packages controlling UAV navigation, sensor data, and communication modules.",
 			"Conducted multiple flight trials validating obstacle avoidance and autonomous decision-making, improving stability and responsiveness.",
 		],
 		image: karasu,

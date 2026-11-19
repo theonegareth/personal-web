@@ -6,14 +6,14 @@ draft: false
 ---
 
 AeroBASE is the drone team at BINUS ASO School of Engineering. I joined as a software engineer in
-2023, and in that time the team built two entries for the Kontes Robot Terbang Indonesia: KARASU
+March 2024, and in that time the team built two entries for the Kontes Robot Terbang Indonesia: KARASU
 for KRTI 2024, our first end-to-end airframe, and HAYABUSA for KRTI 2025. The mission is the same
 each year in outline. Fly a course, find an orange object, pick it up with an electromagnet, find
 a red bucket, drop it, fly through a gate, land. What changed between the two drones was almost
 everything about how we tried to do that, and most of the changes came from things that broke.
 
 This is a team story, so the credits matter. KARASU's mission code was written by Teresa and
-Raymond on vision and Kenrich and Maul on flight control; my work was on the ROS side and the
+Raymond on vision and Kenrich and Maul on flight control; my work was on the
 flight trials. HAYABUSA's Gazebo model was built with Maul and its detector was trained by Winston; I built
 the benchmark harness and kept the simulation assets and the team's course notes.
 
