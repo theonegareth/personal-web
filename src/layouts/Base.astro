@@ -1,5 +1,5 @@
 ---
-import { site } from "../data/site";
+import { site, education, experience, skills } from "../data/site";
 import "../styles/global.css";
 
 type Props = {
@@ -27,6 +27,11 @@ const person = {
 	email: `mailto:${site.email}`,
 	address: { "@type": "PostalAddress", addressLocality: "West Jakarta", addressCountry: "ID" },
 	sameAs: [site.github, site.linkedin, site.huggingface, site.kaggle],
+	alumniOf: education.map((e) => ({ "@type": "EducationalOrganization", name: e.school })),
+	worksFor: experience
+		.filter((j) => j.period.endsWith("present"))
+		.map((j) => ({ "@type": "Organization", name: j.org })),
+	knowsAbout: skills.flatMap((s) => s.items),
 };
 const ld = { "@context": "https://schema.org", "@graph": [person, ...(jsonLd ? [jsonLd] : [])] };
 

@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import { site, projects, projectSlug, experience, education, skills, languages, certifications } from "../data/site";
+import { site, projects, projectSlug, experience, education, skills, languages, certifications, icdeesPaper } from "../data/site";
 import { openData } from "../data/opendata";
 import { getCollection } from "astro:content";
 import strawberryArm from "../assets/projects/strawberry-arm.jpg";
@@ -13,11 +13,19 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 
 const fmt = (n: number) => n.toLocaleString("en-GB");
 
+const paperLd = {
+	"@type": "ScholarlyArticle",
+	headline: icdeesPaper.title,
+	description: `Presented at ${icdeesPaper.venue}.`,
+	url: new URL("/projects/indohoaxdetector/", site.url).href,
+	author: [{ "@id": `${site.url}/#person` }, ...icdeesPaper.coauthors.map((name) => ({ "@type": "Person", name }))],
+};
+
 const featured = projects.filter((p) => p.featured);
 const rest = projects.filter((p) => !p.featured);
 ---
 
-<Base>
+<Base jsonLd={paperLd}>
 	<section class="hero">
 		<div class="wrap hero-grid">
 			<div>

@@ -26,6 +26,12 @@ export const site = {
 	url: "https://theonegareth.com",
 };
 
+export const icdeesPaper = {
+	title: "IndoHoaxDetector: A Comparative Evaluation of Classical Machine Learning and IndoBERT for Indonesian Mixed Corpus Hoax Detection",
+	venue: "ICDEES 2026",
+	coauthors: ["Seline Loewel", "Enrico Ethan"],
+};
+
 export type Project = {
 	title: string;
 	org?: string;
