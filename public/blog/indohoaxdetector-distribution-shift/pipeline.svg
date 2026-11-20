@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 776" role="img" aria-labelledby="t d">
+<title id="t">IndoHoaxDetector pipeline and where it breaks</title>
+<desc id="d">Five steps. 1: 62,934 Indonesian texts from 9 source files, 33,597 factual and 29,337 hoax, each source file holding a single class. 2: verdict tags, fact-check templates and URLs removed, texts under 3 tokens dropped, stratified 80:20 split into 50,347 training and 12,587 test texts. 3: four classical models on stemmed TF-IDF features, and IndoBERT on minimally processed text over three seeds. 4: on the held-out test set accuracy is IndoBERT 99.71 percent, Logistic Regression and SVM 97.62, Random Forest 96.50, Naive Bayes 93.04. 5: removing near-duplicates changes macro-F1 by under 0.1 point, an unseen-publisher split drops weighted F1 to 88.4 for SVM and 86.03 for IndoBERT, and on an external 600-article benchmark without retraining Logistic Regression scores 46.17 percent, SVM 45.33 and IndoBERT 45.00, below the 62 percent majority baseline, with ROC-AUC about 0.50.</desc>
+<style>
+:root{--bg:#fffdf8;--fg:#1b1815;--mu:#6b645a;--ac:#b5461c;--bd:#ddd6c8;--s2:#ede8dd}
+@media (prefers-color-scheme:dark){:root{--bg:#1e1b16;--fg:#ece6da;--mu:#a39b8d;--ac:#ee9a6c;--bd:#37322a;--s2:#26221c}}
+text{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;fill:var(--fg);font-size:13px}
+.mu{fill:var(--mu);font-size:12px}.ac{fill:var(--ac)}.b{font-weight:600}.e{text-anchor:end}
+.bg{fill:var(--bg)}.box{fill:var(--s2);stroke:var(--bd)}.boxa{fill:var(--bg);stroke:var(--ac);stroke-width:1.5}
+.bar{fill:var(--fg)}.bara{fill:var(--ac)}.flow{stroke:var(--mu);stroke-width:2;fill:none}
+.base{stroke:var(--fg);stroke-width:2;stroke-dasharray:5 4}
+</style>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--mu)"/></marker>
+</defs>
+<rect class="bg" width="760" height="776" rx="8"/>
+
+<rect class="box" x="20" y="12" width="720" height="76" rx="6"/>
+<text x="36" y="34" class="b">1 · Data</text>
+<text x="36" y="56">62,934 Indonesian news and fact-check texts: 9 source files from 4 public datasets</text>
+<text x="36" y="76">33,597 factual · 29,337 hoax · <tspan class="ac b">every source file holds a single class</tspan></text>
+
+<path class="flow" d="M380 88 L380 106" marker-end="url(#a)"/>
+
+<rect class="box" x="20" y="108" width="720" height="94" rx="6"/>
+<text x="36" y="130" class="b">2 · Sanitise and split</text>
+<text x="36" y="150">removed verdict tags such as [SALAH] and [HOAKS], fact-check template sections and URLs</text>
+<text x="36" y="168">dropped texts under 3 tokens · stratified 80:20 split: 50,347 train, 12,587 test</text>
+<text x="36" y="188" class="mu">before this step, a rule that only reads the verdict tag scored 99.64% weighted F1</text>
+
+<path class="flow" d="M196 202 L196 220" marker-end="url(#a)"/>
+<path class="flow" d="M564 202 L564 220" marker-end="url(#a)"/>
+
+<rect class="box" x="20" y="222" width="352" height="108" rx="6"/>
+<text x="36" y="244" class="b">3a · Classical models on TF-IDF</text>
+<text x="36" y="264">Logistic Regression, linear SVM,</text>
+<text x="36" y="282">Random Forest, Naive Bayes</text>
+<text x="36" y="300" class="mu">lowercase, clean, stopwords, Sastrawi stemming</text>
+<text x="36" y="318" class="mu">TF-IDF 1–3-grams, tuned by 5-fold CV on train</text>
+
+<rect class="box" x="388" y="222" width="352" height="108" rx="6"/>
+<text x="404" y="244" class="b">3b · IndoBERT (indobert-base-p1)</text>
+<text x="404" y="264">minimally processed text:</text>
+<text x="404" y="282">no stopword removal, no stemming</text>
+<text x="404" y="300" class="mu">128 tokens, batch 16, 3 epochs</text>
+<text x="404" y="318" class="mu">3 random seeds (42, 1, 2)</text>
+
+<path class="flow" d="M196 330 L196 348" marker-end="url(#a)"/>
+<path class="flow" d="M564 330 L564 348" marker-end="url(#a)"/>
+
+<rect class="box" x="20" y="350" width="720" height="190" rx="6"/>
+<text x="36" y="372" class="b">4 · In-distribution test: 12,587 held-out texts</text>
+<text x="36" y="390" class="mu">bar = accuracy, on the same 0–100% scale as step 5</text>
+<text x="175" y="413" class="e">IndoBERT (3 seeds)</text><rect class="bar" x="185" y="402" width="438.7" height="14" rx="2"/><text x="632" y="413">99.71% ± 0.05</text>
+<text x="175" y="437" class="e">Logistic Regression</text><rect class="bar" x="185" y="426" width="429.5" height="14" rx="2"/><text x="623" y="437">97.62%</text>
+<text x="175" y="461" class="e">SVM</text><rect class="bar" x="185" y="450" width="429.5" height="14" rx="2"/><text x="623" y="461">97.62%</text>
+<text x="175" y="485" class="e">Random Forest</text><rect class="bar" x="185" y="474" width="424.6" height="14" rx="2"/><text x="618" y="485">96.50%</text>
+<text x="175" y="509" class="e">Naive Bayes</text><rect class="bar" x="185" y="498" width="409.4" height="14" rx="2"/><text x="603" y="509">93.04%</text>
+<text x="36" y="530" class="mu">training: classical models 10–30 s on CPU; IndoBERT about 2,190 s on a laptop GPU, 499 MB on disk</text>
+
+<path class="flow" d="M380 540 L380 558" marker-end="url(#a)"/>
+
+<rect class="boxa" x="20" y="560" width="720" height="200" rx="6"/>
+<text x="36" y="582" class="b ac">5 · The same models on text from somewhere else</text>
+<text x="36" y="602" class="mu">near-duplicates removed (cosine &gt; 0.80 to a training text): macro-F1 moves under 0.1 point</text>
+<text x="36" y="622">unseen publishers (train CNN Indonesia, Kompas, TurnBackHoax; test Detik, Tempo, Komdigi):</text>
+<text x="36" y="640">weighted F1 falls, SVM 97.6 → 88.4, IndoBERT 99.71 → 86.03 ± 2.96</text>
+<text x="36" y="664" class="b">external benchmark: 600 Indonesian articles, 38% hoax, no retraining</text>
+<text x="175" y="687" class="e">Logistic Regression</text><rect class="bara" x="185" y="676" width="203.1" height="14" rx="2"/><text x="396" y="687">46.17%</text>
+<text x="175" y="711" class="e">SVM</text><rect class="bara" x="185" y="700" width="199.5" height="14" rx="2"/><text x="393" y="711">45.33%</text>
+<text x="175" y="735" class="e">IndoBERT (3 seeds)</text><rect class="bara" x="185" y="724" width="198" height="14" rx="2"/><text x="391" y="735">45.00%</text>
+<line class="base" x1="458" y1="672" x2="458" y2="744"/>
+<text x="468" y="688" class="b">majority-class baseline: 62%</text>
+<text x="468" y="706" class="mu">ROC-AUC ≈ 0.50 for all three: chance</text>
+<text x="468" y="724" class="mu">trained on the benchmark itself, SVM</text>
+<text x="468" y="742" class="mu">reaches 0.83 ROC-AUC (5-fold CV)</text>
+</svg>
