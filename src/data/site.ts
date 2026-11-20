@@ -77,7 +77,7 @@ export const projects: Project[] = [
 		points: [
 			"Group project of five for the Robotics Kinematics and Dynamics course; my part was the machine learning: dataset, labelling and training.",
 			"Trained a YOLOv8n strawberry detector on Kaggle and home-made images plus negatives, reaching mAP@0.5 of about 0.976 on validation and 8.7-9.4 FPS live on a laptop.",
-			"Its detections feed stereo depth and inverse kinematics (22 cm and 16.5 cm links) that drive the servos through a PCA9685 board.",
+			"Its detections feed stereo depth and inverse kinematics (20 cm and 13.2 cm links, plus a 7 cm hand) that drive the servos through a PCA9685 board.",
 		],
 		href: "https://github.com/theonegareth/strawberryPicker",
 		image: strawberryPrototype,
