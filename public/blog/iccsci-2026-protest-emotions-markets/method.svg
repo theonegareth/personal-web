@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560" role="img" aria-labelledby="t d">
+<title id="t">Method pipeline: from protest tweets to market correlations</title>
+<desc id="d">Six steps. About 80,000 Indonesian tweets from 42 keywords (Aug 1 to Sep 30, 2025) are each labelled Anger, Fear or Other by GPT-5. Labels are aggregated per day into net sentiment, the share of Other minus the share of Anger plus Fear. Daily IHSG and USD/IDR closes become daily percentage returns and are merged with sentiment on trading dates, giving 38 paired days. Pearson r with a Fisher z 95% confidence interval and Spearman rho are computed, after normality, stationarity and outlier checks. Result: IHSG r = +0.36, p = 0.027, significant; USD/IDR r = -0.25, p = 0.133, not significant.</desc>
+<style>
+:root{--bg:#fffdf8;--fg:#1b1815;--mu:#6b645a;--ac:#b5461c;--bd:#ddd6c8;--s2:#ede8dd}
+@media (prefers-color-scheme:dark){:root{--bg:#1e1b16;--fg:#ece6da;--mu:#a39b8d;--ac:#ee9a6c;--bd:#37322a;--s2:#26221c}}
+text{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;fill:var(--fg);font-size:13px}
+.mu{fill:var(--mu);font-size:12px}.ac{fill:var(--ac)}.b{font-weight:600}.n{fill:var(--mu);font-size:12px;font-weight:600}
+.bg{fill:var(--bg)}.box{fill:var(--s2);stroke:var(--bd);stroke-width:1.5}.boxa{fill:var(--bg);stroke:var(--ac);stroke-width:2}
+.side{fill:var(--bg);stroke:var(--bd);stroke-width:1.5;stroke-dasharray:4 4}
+.ln{stroke:var(--fg);stroke-width:2;fill:none}
+</style>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--fg)"/></marker>
+</defs>
+<rect class="bg" width="760" height="560" rx="8"/>
+
+<rect class="box" x="30" y="20" width="420" height="64" rx="6"/>
+<text x="46" y="42" class="b"><tspan class="n">1 </tspan>Tweets</text>
+<text x="46" y="60" class="mu">42 Indonesian keywords, Aug 1 – Sep 30, 2025 (90 CSV files)</text>
+<text x="46" y="76" class="mu">~80,000 tweets after deduplication and cleaning</text>
+<path class="ln" d="M240 84 L240 104" marker-end="url(#a)"/>
+
+<rect class="box" x="30" y="108" width="420" height="64" rx="6"/>
+<text x="46" y="130" class="b"><tspan class="n">2 </tspan>Emotion classification (GPT-5)</text>
+<text x="46" y="148" class="mu">each tweet labelled Anger, Fear or Other</text>
+<text x="46" y="164" class="mu">benchmark: 87.05% sentiment accuracy on 440 labelled tweets</text>
+<path class="ln" d="M240 172 L240 192" marker-end="url(#a)"/>
+
+<rect class="box" x="30" y="196" width="420" height="64" rx="6"/>
+<text x="46" y="218" class="b"><tspan class="n">3 </tspan>Daily aggregates</text>
+<text x="46" y="236" class="mu">net sentiment = share(Other) − share(Anger + Fear)</text>
+<text x="46" y="252" class="mu">one value per calendar day, bounded −1 to +1</text>
+<path class="ln" d="M240 260 L240 280" marker-end="url(#a)"/>
+
+<rect class="box" x="30" y="284" width="420" height="64" rx="6"/>
+<text x="46" y="306" class="b"><tspan class="n">4 </tspan>Align with market returns</text>
+<text x="46" y="324" class="mu">merge on trading dates (weekends and Sep 5 holiday drop out)</text>
+<text x="46" y="340" class="mu">38 paired days of sentiment, IHSG return and USD/IDR return</text>
+
+<rect class="side" x="490" y="284" width="240" height="64" rx="6"/>
+<text x="506" y="306" class="b">Market data</text>
+<text x="506" y="324" class="mu">IHSG and USD/IDR daily close</text>
+<text x="506" y="340" class="mu">→ daily % change, 42 trading days</text>
+<path class="ln" d="M490 316 L454 316" marker-end="url(#a)"/>
+<path class="ln" d="M240 348 L240 368" marker-end="url(#a)"/>
+
+<rect class="box" x="30" y="372" width="420" height="64" rx="6"/>
+<text x="46" y="394" class="b"><tspan class="n">5 </tspan>Statistical test</text>
+<text x="46" y="412" class="mu">Pearson r, Fisher z 95% CI, Spearman ρ</text>
+<text x="46" y="428" class="mu">after normality, stationarity and outlier checks</text>
+
+<rect class="side" x="490" y="372" width="240" height="64" rx="6"/>
+<text x="506" y="394" class="b">Also per window</text>
+<text x="506" y="412" class="mu">Before Demo (n = 14), Demo (n = 9),</text>
+<text x="506" y="428" class="mu">After Demo (n = 15)</text>
+<path class="ln" d="M490 404 L454 404" style="stroke-dasharray:4 4" marker-end="url(#a)"/>
+<path class="ln" d="M240 436 L240 456" marker-end="url(#a)"/>
+
+<rect class="boxa" x="30" y="460" width="420" height="72" rx="6"/>
+<text x="46" y="482" class="b ac"><tspan class="n">6 </tspan>Findings (full period, n = 38)</text>
+<text x="46" y="502">IHSG: r = +0.36, p = 0.027, 95% CI [+0.04, +0.61]</text>
+<text x="46" y="521">USD/IDR: r = −0.25, p = 0.133, not significant</text>
+
+<rect class="side" x="490" y="460" width="240" height="72" rx="6"/>
+<text x="506" y="482" class="b">IHSG by window</text>
+<text x="506" y="502" class="mu">After Demo: r = +0.53, p = 0.043</text>
+<text x="506" y="521" class="mu">Demo: r = +0.37, p = 0.329 (n = 9)</text>
+</svg>
