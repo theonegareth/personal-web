@@ -105,7 +105,7 @@ export const projects: Project[] = [
 		title: "HAYABUSA, KRTI 2025",
 		org: "BINUS ASO School of Engineering (AeroBASE)",
 		period: "Oct 2024 - Oct 2025",
-		blurb: "Autonomous drone carrying three LiDAR sensors for obstacle avoidance and mapping, plus a dual-camera setup: front-facing for gate detection and navigation, bottom-facing for object detection and mission tasks.",
+		blurb: "Autonomous drone carrying three TFmini LiDAR sensors for obstacle avoidance, plus a dual-camera setup: front-facing for gate detection and navigation, bottom-facing for object detection and mission tasks.",
 		tags: ["ROS", "Gazebo", "Object Detection", "LiDAR"],
 		points: [
 			"Built HAYABUSA's Gazebo simulation model with Maul for flight control and mission testing.",
