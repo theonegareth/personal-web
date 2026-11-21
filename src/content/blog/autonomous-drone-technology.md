@@ -37,9 +37,10 @@ the bottom camera's frame.
 
 HAYABUSA kept the same flight controller and the same division of labour, the Cube flies and the
 computer decides, but changed the layers above it. Three LiDARs instead of four, two cameras for
-real, ROS 2 Jazzy instead of bare DroneKit scripts, a Gazebo simulation of the airframe, and a
-trained YOLO detector instead of colour thresholds. The team has since moved further, to PX4 and a
-Jetson, but that is the 2026 team's story.
+real, ROS 2 packages on a Jetson (still talking to the Cube through DroneKit) instead of bare
+DroneKit scripts on a Pi, a Gazebo simulation of the airframe, and a
+trained YOLO detector instead of colour thresholds. The team has since moved further, to PX4, but that
+is the 2026 team's story.
 
 ## Where simulation stopped matching reality
 
@@ -80,7 +81,7 @@ HAYABUSA got the simulation KARASU lacked, and it produced a different gap. We m
 hexacopter in Gazebo Harmonic from the CAD meshes, wired it to ArduPilot software-in-the-loop
 through the ArduPilot plugin, and wrote a Lua dynamic motor matrix so ArduPilot would fly a six
 motor frame the plugin's examples did not cover. What the model never got was sensors beyond an
-IMU. No camera, no LiDAR. So the simulation could test arming, takeoff and mission sequencing,
+IMU. No camera, no LiDAR. So the simulation was built to test arming, takeoff and mission sequencing,
 and could not test a single line of the perception stack, which was the part that had actually
 failed in 2024. My R&D notes from that year have a chapter titled "Building a Drone WRONGLY in GZ
 sim, please dont follow this for the files," and the [assets repository](https://github.com/theonegareth/GZassets)
