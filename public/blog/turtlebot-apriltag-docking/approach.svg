@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" role="img" aria-labelledby="t d">
+<title id="t">Approach sequence to a docking tag</title>
+<desc id="d">Top-down view. The robot leaves the previous gate's taxiway point, goes through a hub point when gates are more than 0.7 m apart, drives on odometry to the taxiway point 0.50 m in front of the tag and the staging point 0.35 m in front, then switches to visual servoing to stop 0.25 m from the tag, and finally reverses about 0.67 m.</desc>
+<style>
+:root{--bg:#fffdf8;--fg:#1b1815;--mu:#6b645a;--ac:#b5461c;--bd:#ddd6c8;--s2:#ede8dd}
+@media (prefers-color-scheme:dark){:root{--bg:#1e1b16;--fg:#ece6da;--mu:#a39b8d;--ac:#ee9a6c;--bd:#37322a;--s2:#26221c}}
+text{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;fill:var(--fg);font-size:13px}
+.mu{fill:var(--mu);font-size:12px}.ac{fill:var(--ac)}.b{font-weight:600}
+.bg{fill:var(--bg)}.wall{stroke:var(--fg);stroke-width:4}.axis{stroke:var(--bd);stroke-width:1.5;stroke-dasharray:4 4}
+.odo{stroke:var(--fg);stroke-width:2;fill:none}.vis{stroke:var(--ac);stroke-width:3;fill:none}
+.dash{stroke-dasharray:6 5}.pt{fill:var(--bg);stroke:var(--fg);stroke-width:2}.pta{fill:var(--ac)}
+.note{fill:var(--s2);stroke:var(--bd)}
+</style>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--fg)"/></marker>
+<marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ac)"/></marker>
+</defs>
+<rect class="bg" width="760" height="430" rx="8"/>
+<line class="wall" x1="660" y1="50" x2="660" y2="300"/>
+<text x="668" y="64" class="mu">wall</text>
+<rect x="648" y="187" width="12" height="26" style="fill:var(--fg)"/><rect x="651" y="192" width="6" height="6" class="bg"/><rect x="651" y="202" width="6" height="6" class="bg"/>
+<text x="668" y="196" class="b">AprilTag</text><text x="668" y="212" class="mu">2.5 cm</text>
+<line class="axis" x1="250" y1="200" x2="648" y2="200"/>
+<path class="odo dash" d="M90 110 Q150 270 215 290" marker-end="url(#a)"/>
+<path class="odo dash" d="M225 286 Q380 230 503 205" marker-end="url(#a)"/>
+<path class="odo" d="M518 200 L546 200" marker-end="url(#a)"/>
+<path class="vis" d="M563 200 L578 200" marker-end="url(#aa)"/>
+<path class="vis dash" d="M585 214 L585 236 L395 236" marker-end="url(#aa)"/>
+<circle class="pt" cx="90" cy="104" r="6"/><text x="104" y="96">previous gate</text><text x="104" y="112" class="mu">its taxiway point</text>
+<circle class="pt" cx="220" cy="290" r="6"/><text x="160" y="318" class="b">hub</text><text x="160" y="334" class="mu">junction between gates,</text><text x="160" y="350" class="mu">used when gates are &gt; 0.7 m apart</text>
+<circle class="pt" cx="510" cy="200" r="6"/><circle class="pt" cx="555" cy="200" r="6"/><circle class="pta" cx="585" cy="200" r="7"/>
+<line x1="510" y1="160" x2="510" y2="190" style="stroke:var(--bd)"/><line x1="555" y1="130" x2="555" y2="190" style="stroke:var(--bd)"/><line x1="585" y1="100" x2="585" y2="190" style="stroke:var(--bd)"/>
+<text x="510" y="154" text-anchor="end" class="b">taxiway</text><text x="510" y="140" text-anchor="end" class="mu">0.50 m from tag</text>
+<text x="555" y="124" text-anchor="end" class="b">staging</text><text x="555" y="110" text-anchor="end" class="mu">0.35 m</text>
+<text x="585" y="94" text-anchor="end" class="b ac">docked</text><text x="585" y="80" text-anchor="end" class="mu">0.25 m, within 3 cm and 0.05 rad</text>
+<text x="330" y="262" class="ac">pushback: reverse ~0.67 m (0.15 m/s for 4.5 s)</text>
+<line x1="40" y1="372" x2="70" y2="372" class="odo"/><text x="78" y="376" class="mu">odometry (wheel counts)</text>
+<line x1="250" y1="372" x2="280" y2="372" class="vis"/><text x="288" y="376" class="mu">visual servoing on the tag</text>
+<text x="40" y="400" class="mu">Tag seen at any point on the way: hand over to visual docking early.</text><text x="40" y="416" class="mu">Staging reached without a sighting: slow spin (0.25 rad/s) until the tag is found.</text>
+</svg>

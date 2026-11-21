@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 470" role="img" aria-labelledby="t d">
+<title id="t">Explore-and-dock state machine</title>
+<desc id="d">States: SEARCHING follows the right wall at 0.40 m. If the front is closer than 0.49 m for 3 cycles it goes to PIVOTING, a 90 degree left turn, then back to SEARCHING. An unvisited tag within 1.0 m starts DOCKING to 0.30 m; within 5 cm, or if the tag is lost for over 3 s, it goes to REVERSING for 2 s, then REALIGNING to the pre-dock heading, then SEARCHING. After more than 3 m travelled and back within 0.4 m of the start, it goes to COMPLETE.</desc>
+<style>
+:root{--bg:#fffdf8;--fg:#1b1815;--mu:#6b645a;--ac:#b5461c;--bd:#ddd6c8;--s2:#ede8dd}
+@media (prefers-color-scheme:dark){:root{--bg:#1e1b16;--fg:#ece6da;--mu:#a39b8d;--ac:#ee9a6c;--bd:#37322a;--s2:#26221c}}
+text{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;fill:var(--fg);font-size:13px}
+.mu{fill:var(--mu);font-size:12px}.st{font-weight:700;font-size:13px;letter-spacing:.04em}
+.bg{fill:var(--bg)}.box{fill:var(--s2);stroke:var(--fg);stroke-width:1.5}.boxa{fill:var(--s2);stroke:var(--ac);stroke-width:2.5}
+.e{stroke:var(--fg);stroke-width:1.6;fill:none}.ea{stroke:var(--ac);stroke-width:2.2;fill:none}.d{stroke-dasharray:6 5}
+.lab{fill:var(--bg)}
+</style>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--fg)"/></marker>
+<marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--ac)"/></marker>
+</defs>
+<rect class="bg" width="720" height="470" rx="8"/>
+<rect class="box" x="30" y="30" width="200" height="56" rx="8"/><text x="130" y="53" text-anchor="middle" class="st">PIVOTING</text><text x="130" y="72" text-anchor="middle" class="mu">turn left 90°</text>
+<rect class="box" x="30" y="190" width="200" height="56" rx="8"/><text x="130" y="213" text-anchor="middle" class="st">SEARCHING</text><text x="130" y="232" text-anchor="middle" class="mu">follow right wall at 0.40 m</text>
+<rect class="box" x="30" y="350" width="200" height="56" rx="8"/><text x="130" y="373" text-anchor="middle" class="st">COMPLETE</text><text x="130" y="392" text-anchor="middle" class="mu">stop</text>
+<rect class="boxa" x="490" y="30" width="200" height="56" rx="8"/><text x="590" y="53" text-anchor="middle" class="st">DOCKING</text><text x="590" y="72" text-anchor="middle" class="mu">visual servo to 0.30 m</text>
+<rect class="box" x="490" y="190" width="200" height="56" rx="8"/><text x="590" y="213" text-anchor="middle" class="st">REVERSING</text><text x="590" y="232" text-anchor="middle" class="mu">back up 2 s at 0.12 m/s</text>
+<rect class="box" x="490" y="350" width="200" height="56" rx="8"/><text x="590" y="373" text-anchor="middle" class="st">REALIGNING</text><text x="590" y="392" text-anchor="middle" class="mu">turn to pre-dock heading</text>
+<path class="e" d="M95 190 L95 90" marker-end="url(#a)"/>
+<text x="172" y="112" class="mu">↑ front &lt; 0.49 m,</text><text x="183" y="127" class="mu">3 cycles in a row</text>
+<path class="e" d="M165 86 L165 186" marker-end="url(#a)"/>
+<text x="172" y="152" class="mu">↓ within 0.06 rad;</text><text x="183" y="167" class="mu">ignore front 1.5 s</text>
+<path class="ea" d="M230 215 Q400 200 486 82" marker-end="url(#aa)"/>
+<text x="420" y="178" style="fill:var(--ac)">unvisited tag &lt; 1.0 m</text>
+<path class="e" d="M590 86 L590 186" marker-end="url(#a)"/>
+<text x="598" y="128" class="mu">within 5 cm,</text><text x="598" y="143" class="mu">or tag lost &gt; 3 s</text>
+<path class="e" d="M590 246 L590 346" marker-end="url(#a)"/>
+<text x="598" y="300" class="mu">after 2 s</text>
+<path class="e" d="M490 372 Q360 330 234 232" marker-end="url(#a)"/>
+<text x="360" y="388" text-anchor="middle" class="mu">within 0.08 rad;</text><text x="360" y="403" text-anchor="middle" class="mu">ignore front 1.0 s</text>
+<path class="e d" d="M130 246 L130 346" marker-end="url(#a)"/>
+<text x="138" y="290" class="mu">from any state: &gt; 3 m travelled</text><text x="138" y="305" class="mu">and back within 0.4 m of start</text>
+<text x="30" y="440" class="mu">In every state: a tag seen 5 times within 0.75 m is saved as a waypoint (position averaged over later sightings,</text>
+<text x="30" y="456" class="mu">jumps over 0.15 m ignored once it has 5 sightings, camera snapshot saved).</text>
+</svg>
