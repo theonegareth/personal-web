@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 452" role="img" aria-labelledby="t d">
+<title id="t">One pick cycle of the strawberry-picking arm</title>
+<desc id="d">On the laptop, two webcams capture left and right images, a YOLOv8n model finds ripe strawberries and their center points, stereo matching and the disparity give depth, and the camera axes are remapped to the robot's axes. If no strawberry is found, the camera takes another photo. The coordinates go over serial to an Arduino Uno as X_cm, Z_cm, Y_cm. Inverse kinematics gives the joint angles, the PCA9685 servo driver sends PWM to the base, shoulder, elbow and wrist servos, and the scissor servo cuts the stem so the fruit goes into the basket. The Arduino then replies READY and the cycle starts again.</desc>
+<style>
+:root{--bg:#fffdf8;--fg:#1b1815;--mu:#6b645a;--ac:#b5461c;--bd:#ddd6c8;--s2:#ede8dd}
+@media (prefers-color-scheme:dark){:root{--bg:#1e1b16;--fg:#ece6da;--mu:#a39b8d;--ac:#ee9a6c;--bd:#37322a;--s2:#26221c}}
+text{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;fill:var(--fg);font-size:13px}
+.mu{fill:var(--mu);font-size:12px}.ac{fill:var(--ac)}.b{font-weight:600}
+.bg{fill:var(--bg)}.box{fill:var(--s2);stroke:var(--bd);stroke-width:1.5}.boxa{fill:var(--s2);stroke:var(--ac);stroke-width:2}
+.ln{stroke:var(--fg);stroke-width:2;fill:none}.lna{stroke:var(--ac);stroke-width:2;fill:none;stroke-dasharray:6 5}
+.lnm{stroke:var(--mu);stroke-width:1.5;fill:none;stroke-dasharray:4 4}
+</style>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--fg)"/></marker>
+<marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ac)"/></marker>
+<marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--mu)"/></marker>
+</defs>
+<rect class="bg" width="760" height="452" rx="8"/>
+
+<text x="24" y="28" class="b">Laptop: Python + OpenCV</text>
+
+<!-- row 1 -->
+<rect class="box" x="24" y="42" width="160" height="130" rx="6"/>
+<text x="36" y="64" class="b">1 Capture</text>
+<text x="36" y="84" class="mu">2 webcams, left (0)</text>
+<text x="36" y="101" class="mu">and right (1), used</text>
+<text x="36" y="118" class="mu">as a stereo camera</text>
+
+<rect class="box" x="208" y="42" width="160" height="130" rx="6"/>
+<text x="220" y="64" class="b">2 Detect</text>
+<text x="220" y="84" class="mu">YOLOv8n (best.pt)</text>
+<text x="220" y="101" class="mu">conf = 0.2</text>
+<text x="220" y="118" class="mu">ripe strawberry →</text>
+<text x="220" y="135" class="mu">box → center point</text>
+
+<rect class="box" x="392" y="42" width="160" height="130" rx="6"/>
+<text x="404" y="64" class="b">3 Depth</text>
+<text x="404" y="84" class="mu">pair left/right boxes</text>
+<text x="404" y="101" class="mu">sorted by x</text>
+<text x="404" y="118" class="mu">Z = B × f / disparity</text>
+<text x="404" y="135" class="mu">B, f from stereo.npz</text>
+
+<rect class="box" x="576" y="42" width="160" height="130" rx="6"/>
+<text x="588" y="64" class="b">4 Camera → robot</text>
+<text x="588" y="84" class="mu">robot X = camera X</text>
+<text x="588" y="101" class="mu">robot Y = camera Z</text>
+<text x="588" y="118" class="mu">(depth → reach)</text>
+<text x="588" y="135" class="mu">robot Z = camera Y</text>
+
+<path class="ln" d="M186 107 H204" marker-end="url(#a)"/>
+<path class="ln" d="M370 107 H388" marker-end="url(#a)"/>
+<path class="ln" d="M554 107 H572" marker-end="url(#a)"/>
+
+<!-- no detection loop -->
+<path class="lnm" d="M288 174 V192 H104 V178" marker-end="url(#am)"/>
+<text x="112" y="210" class="mu">no strawberry: take another photo</text>
+
+<!-- row1 to row2 -->
+<path class="ln" d="M656 174 V226" marker-end="url(#a)"/>
+<text x="664" y="204" class="mu">serial</text>
+
+<!-- row 2, right to left -->
+<rect class="box" x="576" y="232" width="160" height="140" rx="6"/>
+<text x="588" y="254" class="b">5 To the Arduino</text>
+<text x="588" y="274" class="mu">Arduino Uno reads</text>
+<text x="588" y="291" class="mu">X_cm, Z_cm, Y_cm</text>
+<text x="588" y="308" class="mu">e.g. 12.50,25.30,5.20</text>
+
+<rect class="box" x="392" y="232" width="160" height="140" rx="6"/>
+<text x="404" y="254" class="b">6 Inverse kinematics</text>
+<text x="404" y="274" class="mu">θ0 = atan2(y, x)</text>
+<text x="404" y="291" class="mu">planar 2-link arm</text>
+<text x="404" y="308" class="mu">+ tool offset</text>
+<text x="404" y="325" class="mu">q = [θ0, θ1, θ2, θ3]</text>
+
+<rect class="box" x="208" y="232" width="160" height="140" rx="6"/>
+<text x="220" y="254" class="b">7 Move the arm</text>
+<text x="220" y="274" class="mu">PCA9685 → PWM</text>
+<text x="220" y="291" class="mu">base, elbow: MG996R</text>
+<text x="220" y="308" class="mu">shoulder: DS3240</text>
+<text x="220" y="325" class="mu">wrist: SG90s</text>
+
+<rect class="boxa" x="24" y="232" width="160" height="140" rx="6"/>
+<text x="36" y="254" class="b ac">8 Cut and place</text>
+<text x="36" y="274" class="mu">scissor servo MG90s</text>
+<text x="36" y="291" class="mu">cuts the stem</text>
+<text x="36" y="308" class="mu">gripper holds fruit</text>
+<text x="36" y="325" class="mu">→ into the basket</text>
+
+<path class="ln" d="M574 302 H556" marker-end="url(#a)"/>
+<path class="ln" d="M390 302 H372" marker-end="url(#a)"/>
+<path class="ln" d="M206 302 H188" marker-end="url(#a)"/>
+
+<!-- READY handshake back to capture -->
+<path class="lna" d="M104 374 V394 H12 V107 H20" marker-end="url(#aa)"/>
+<text x="24" y="412" class="ac">Arduino replies READY: Python sends the next target only then</text>
+<text x="24" y="436" class="mu">Arduino Uno + PCA9685 16-channel servo driver, 5 V 10 A supply</text>
+</svg>
