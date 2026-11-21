@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" role="img" aria-labelledby="t d">
+<title id="t">HAYABUSA system blocks</title>
+<desc id="d">Block diagram of the HAYABUSA hexacopter. Three LiDARs, a front camera and a bottom camera feed the companion computer, which runs ROS 2 with a perception stage (OpenCV and a YOLO detector) and a mission node with a control node. The companion computer sends flight commands through DroneKit to a Cube flight controller running ArduPilot and receives roll, pitch and yaw back at 20 Hz. A ground station with telemetry, RTK and a laptop links to the flight controller. The mission node sequences the KRTI mission: take off from the start pad, pick up the orange object, drop it in the red basket, fly through the gate, land.</desc>
+<style>
+:root{--bg:#fffdf8;--fg:#1b1815;--mu:#6b645a;--ac:#b5461c;--bd:#ddd6c8;--s2:#ede8dd}
+@media (prefers-color-scheme:dark){:root{--bg:#1e1b16;--fg:#ece6da;--mu:#a39b8d;--ac:#ee9a6c;--bd:#37322a;--s2:#26221c}}
+text{font-family:-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;fill:var(--fg);font-size:13px}
+.mu{fill:var(--mu);font-size:12px}.ac{fill:var(--ac)}.b{font-weight:600}.cap{fill:var(--mu);font-size:11px;letter-spacing:.08em}
+.bg{fill:var(--bg)}.box{fill:var(--bg);stroke:var(--fg);stroke-width:1.5}.grp{fill:var(--s2);stroke:var(--bd);stroke-width:1.5}
+.abox{fill:var(--bg);stroke:var(--ac);stroke-width:2}
+.ln{stroke:var(--fg);stroke-width:1.5;fill:none}.la{stroke:var(--ac);stroke-width:2;fill:none}.dash{stroke-dasharray:5 4}
+</style>
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--fg)"/></marker>
+<marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ac)"/></marker>
+</defs>
+<rect class="bg" width="760" height="430" rx="8"/>
+<text x="24" y="34" class="b">HAYABUSA hexacopter, KRTI 2025</text>
+
+<text x="24" y="62" class="cap">SENSORS</text>
+<rect class="box" x="24" y="72" width="196" height="50" rx="6"/><text x="36" y="93" class="b">3 × LiDAR</text><text x="36" y="110" class="mu">obstacle avoidance, mapping</text>
+<rect class="box" x="24" y="134" width="196" height="50" rx="6"/><text x="36" y="155" class="b">Front camera</text><text x="36" y="172" class="mu">gate detection, navigation</text>
+<rect class="box" x="24" y="196" width="196" height="50" rx="6"/><text x="36" y="217" class="b">Bottom camera</text><text x="36" y="234" class="mu">object detection, tasks</text>
+
+<path class="ln" d="M220 97H266" marker-end="url(#a)"/>
+<path class="ln" d="M220 159H266" marker-end="url(#a)"/>
+<path class="ln" d="M220 221H266" marker-end="url(#a)"/>
+
+<text x="270" y="62" class="cap">COMPANION COMPUTER</text>
+<rect class="grp" x="270" y="72" width="190" height="174" rx="8"/>
+<text x="284" y="94" class="b">ROS 2</text>
+<rect class="box" x="284" y="106" width="162" height="56" rx="6"/><text x="296" y="128" class="b">Perception</text><text x="296" y="146" class="mu">OpenCV, YOLO detector</text>
+<rect class="abox" x="284" y="176" width="162" height="56" rx="6"/><text x="296" y="198" class="b ac">Mission node</text><text x="296" y="216" class="mu">and control node</text>
+<path class="ln" d="M365 162V174" marker-end="url(#a)"/>
+
+<text x="525" y="80" class="mu" text-anchor="middle">flight commands</text><text x="525" y="94" class="mu" text-anchor="middle">via DroneKit</text>
+<path class="ln" d="M460 102H586" marker-end="url(#a)"/>
+<path class="ln" d="M590 124H464" marker-end="url(#a)"/>
+<text x="525" y="142" class="mu" text-anchor="middle">roll, pitch, yaw</text><text x="525" y="156" class="mu" text-anchor="middle">at 20 Hz</text>
+
+<text x="590" y="62" class="cap">FLIGHT CONTROL</text>
+<rect class="box" x="590" y="72" width="146" height="70" rx="6"/><text x="602" y="100" class="b">Flight controller</text><text x="602" y="118" class="mu">Cube, ArduPilot</text>
+<path class="ln dash" d="M663 142V176" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="671" y="164" class="mu">telemetry</text>
+<rect class="box" x="590" y="178" width="146" height="68" rx="6"/><text x="602" y="200" class="b">Ground station</text><text x="602" y="218" class="mu">telemetry, RTK,</text><text x="602" y="234" class="mu">laptop</text>
+
+<path class="la dash" d="M365 232V290" marker-end="url(#aa)"/>
+<text x="375" y="266" class="mu">sequences the mission</text>
+
+<text x="24" y="282" class="cap">KRTI MISSION</text>
+<rect class="grp" x="24" y="292" width="712" height="88" rx="8"/>
+<rect class="box" x="38" y="304" width="118" height="64" rx="6"/><text x="97" y="331" class="b" text-anchor="middle">Take off</text><text x="97" y="349" class="mu" text-anchor="middle">from start pad</text>
+<rect class="box" x="178" y="304" width="118" height="64" rx="6"/><text x="237" y="331" class="b" text-anchor="middle">Pick up</text><text x="237" y="349" class="mu" text-anchor="middle">orange object</text>
+<rect class="box" x="318" y="304" width="118" height="64" rx="6"/><text x="377" y="331" class="b" text-anchor="middle">Drop</text><text x="377" y="349" class="mu" text-anchor="middle">in red basket</text>
+<rect class="box" x="458" y="304" width="118" height="64" rx="6"/><text x="517" y="331" class="b" text-anchor="middle">Fly through</text><text x="517" y="349" class="mu" text-anchor="middle">the gate</text>
+<rect class="box" x="598" y="304" width="124" height="64" rx="6"/><text x="660" y="340" class="b" text-anchor="middle">Land</text>
+<path class="ln" d="M156 336H174" marker-end="url(#a)"/>
+<path class="ln" d="M296 336H314" marker-end="url(#a)"/>
+<path class="ln" d="M436 336H454" marker-end="url(#a)"/>
+<path class="ln" d="M576 336H594" marker-end="url(#a)"/>
+
+<text x="24" y="408" class="mu">Sensor roles from the HAYABUSA project entry; stack from the team deck, the GZassets repo and the earlier post;</text>
+<text x="24" y="423" class="mu">mission steps from the earlier post and the KRTI 2025 field drawings.</text>
+</svg>
