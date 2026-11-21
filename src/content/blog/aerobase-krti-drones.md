@@ -34,7 +34,7 @@ HAYABUSA is the third generation: a hexacopter the team describes as built for a
 
 ### Sensors
 
-HAYABUSA carries three LiDARs for obstacle avoidance and mapping, and two cameras. The front camera handles gate detection and navigation. The bottom camera handles object detection and the pick-up and drop tasks. That is one LiDAR fewer than KARASU, and the first time both cameras actually flew.
+HAYABUSA carries three LiDARs for obstacle avoidance, and two cameras. The front camera handles gate detection and navigation. The bottom camera handles object detection and the pick-up and drop tasks. That is one LiDAR fewer than KARASU, and the first time both cameras actually flew.
 
 In the KRTI 2025 code the three LiDARs are TFmini rangefinders on the I2C bus, facing front, left and right. The launch configuration also defines a rear-facing one and leaves it switched off.
 
