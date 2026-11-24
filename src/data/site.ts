@@ -13,6 +13,7 @@ import fishFeeder from "../assets/projects/fish-feeder.png";
 import datasetsChart from "../assets/projects/datasets.png";
 import iccsciScatter from "../assets/projects/iccsci-scatter.png";
 import iccsciTimeline from "../assets/projects/iccsci-timeline.png";
+import iccsciPeriods from "../assets/projects/iccsci-periods.png";
 
 export const site = {
 	name: "Gareth Aurelius Harrison",
@@ -131,6 +132,11 @@ export const projects: Project[] = [
 				image: iccsciTimeline,
 				alt: "IHSG rebased to 100 from August to September 2025, shaded before, during and after the protests, falling after the 25 August start and the 29 August plunge, then climbing to about 109 by late September",
 				caption: "The IHSG over the three periods, rebased to 100, with the main protest events marked.",
+			},
+			{
+				image: iccsciPeriods,
+				alt: "Bar chart of Pearson r by period: IHSG +0.18, +0.37 and +0.53, USD/IDR -0.45, -0.08 and -0.27, before (n = 14), during (n = 9) and after (n = 15) the protests",
+				caption: "Correlation of daily net sentiment with same-day returns in each period, with the number of paired trading days.",
 			},
 		],
 	},
