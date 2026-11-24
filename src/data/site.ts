@@ -330,7 +330,7 @@ export const experience: Job[] = [
 		role: "Laboratory Assistant (Teaching Assistant)",
 		org: "BINUS ASO School of Engineering",
 		location: "South Tangerang, Indonesia",
-		summary: "Supported the Decision Making Under Uncertainty course, guiding 20+ students through Analytical Hierarchy Process models in SuperDecisions. Prepared 10+ lab materials and case studies and delivered 14+ weekly tutorials on hierarchical modelling and pairwise comparison.",
+		summary: "Lab assistant for the Decision Making Under Uncertainty course (one class of 17 students): ran the 14 weekly lab sessions in SuperDecisions from 10 lab modules, from building AHP models and sensitivity analysis to ANP, rating models and BOCR, revised the modules, and kept the lab grades.",
 	},
 	{
 		period: "Sep 2025 - Jan 2026",
