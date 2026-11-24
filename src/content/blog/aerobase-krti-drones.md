@@ -48,7 +48,7 @@ The detector is a YOLOv10n trained on one class, the orange object. It reached a
 
 ### Simulation in Gazebo and ROS 2 Jazzy
 
-HAYABUSA is the first AeroBASE drone with a simulation. The [GZassets repository](https://github.com/theonegareth/GZassets) holds the hexacopter as an SDF/URDF model with meshes for the frame, propellers and camera mounts, and a Gazebo Sim world with a ground plane, built for Gazebo Sim and ROS 2 Jazzy. The deck's R&D slide shows a ROS 2 DroneKit node arming a simulated drone in Gazebo Sim and climbing to its target altitude.
+HAYABUSA is the first AeroBASE drone with a simulation. The [GZassets repository](https://github.com/theonegareth/GZassets) holds the hexacopter as an SDF model with meshes for the frame, rotors and propellers, and a Gazebo Sim world with a ground plane, built for Gazebo Sim and ROS 2 Jazzy. The deck's R&D slide shows a ROS 2 DroneKit node arming a simulated drone in Gazebo Sim and climbing to its target altitude.
 
 The simulation has a known hole. The README marks camera and LiDAR as not implemented, the IMU as partial, and the transform tree as not done; ROS 2 launch files only arrived in November 2025, after the KRTI 2025 season. So the simulator could test arming, take-off and mission sequencing, but not the perception that failed most often on the real drone.
 
