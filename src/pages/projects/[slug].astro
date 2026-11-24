@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { getEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { site, projects, projectSlug, type Project } from "../../data/site";
 
@@ -8,6 +9,13 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props as { project: Project };
+const posts = await Promise.all(
+	(project.posts ?? []).map(async (id) => {
+		const post = await getEntry("blog", id);
+		if (!post || post.data.draft) throw new Error(`${project.title}: no published post "${id}"`);
+		return post;
+	}),
+);
 const url = new URL(Astro.url.pathname, site.url).href;
 const jsonLd = {
 	"@type": "CreativeWork",
@@ -41,6 +49,20 @@ const jsonLd = {
 				<ul>
 					{project.points.map((point) => <li>{point}</li>)}
 				</ul>
+				{
+					posts.length > 0 && (
+						<>
+							<h2>{posts.length > 1 ? "Posts" : "Post"}</h2>
+							<ul>
+								{posts.map((post) => (
+									<li>
+										<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+									</li>
+								))}
+							</ul>
+						</>
+					)
+				}
 				<ul class="tags">
 					{project.tags.map((tag) => <li>{tag}</li>)}
 				</ul>

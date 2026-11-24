@@ -45,6 +45,7 @@ export type Project = {
 	imageAlt?: string;
 	contain?: boolean;
 	featured?: boolean;
+	posts?: string[];
 };
 
 // ponytail: slug comes from the title, so renaming a project changes its URL; add a slug field if that ever matters
@@ -67,6 +68,7 @@ export const projects: Project[] = [
 		image: turtlebotArena,
 		imageAlt: "TurtleBot in the test arena at Toyohashi, surrounded by cones and boxes carrying AprilTag landmarks",
 		featured: true,
+		posts: ["turtlebot-apriltag-docking"],
 	},
 	{
 		title: "Strawberry Picking Robotic Arm",
@@ -83,6 +85,7 @@ export const projects: Project[] = [
 		image: strawberryPrototype,
 		imageAlt: "Strawberry-picking arm prototype on the bench, reaching for strawberries beside a laptop",
 		featured: true,
+		posts: ["strawberry-picking-arm"],
 	},
 	{
 		title: "IndoHoaxDetector",
@@ -100,6 +103,7 @@ export const projects: Project[] = [
 		hrefLabel: "Live demo",
 		image: indohoaxApp,
 		imageAlt: "IndoHoaxDetector running on Hugging Face Spaces, classifying a pasted Indonesian article as HOAX",
+		posts: ["indohoaxdetector-distribution-shift"],
 	},
 	{
 		title: "HAYABUSA, KRTI 2025",
@@ -114,6 +118,7 @@ export const projects: Project[] = [
 		image: hayabusa,
 		imageAlt: "Two AeroBASE members holding the HAYABUSA drone up outdoors",
 		featured: true,
+		posts: ["aerobase-krti-drones", "autonomous-drone-technology"],
 	},
 	{
 		title: "KARASU (カラス), KRTI 2024",
@@ -126,6 +131,7 @@ export const projects: Project[] = [
 		],
 		image: karasu,
 		imageAlt: "The KARASU quadcopter on an outdoor court during a flight trial",
+		posts: ["aerobase-krti-drones", "autonomous-drone-technology"],
 	},
 	{
 		title: "KRTI 2025 Gazebo Simulation Assets",
@@ -139,6 +145,7 @@ export const projects: Project[] = [
 		href: "https://github.com/theonegareth/GZassets",
 		image: krtiGazebo,
 		imageAlt: "Gazebo simulation of the KRTI 2025 drone on the ground plane with the entity tree open",
+		posts: ["aerobase-krti-drones", "autonomous-drone-technology"],
 	},
 	{
 		title: "PLANTESA: IoT & ML Plant Incubation System",
@@ -155,6 +162,7 @@ export const projects: Project[] = [
 		image: plantesaLeaf,
 		imageAlt: "Tomato leaf with early blight lesions outlined in red by the Plantesa detector, reading Brown 7.06%",
 		featured: true,
+		posts: ["plantesa-plant-incubation", "ml-for-agricultural-automation"],
 	},
 	{
 		title: "Depression Detection via Voice Analysis",
@@ -244,6 +252,7 @@ export const projects: Project[] = [
 		href: "https://github.com/theonegareth/SMARTFishFeeder",
 		image: fishFeeder,
 		imageAlt: "Automatic fish feeder unit with its LCD lit, mounted beside the aquarium",
+		posts: ["embedded-systems-with-arduino"],
 	},
 ];
 
