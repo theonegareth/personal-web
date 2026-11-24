@@ -11,6 +11,8 @@ import shredderSlump from "../assets/projects/shredder-slump.jpg";
 import smartParking from "../assets/projects/smart-parking.png";
 import fishFeeder from "../assets/projects/fish-feeder.png";
 import datasetsChart from "../assets/projects/datasets.png";
+import iccsciScatter from "../assets/projects/iccsci-scatter.png";
+import iccsciTimeline from "../assets/projects/iccsci-timeline.png";
 
 export const site = {
 	name: "Gareth Aurelius Harrison",
@@ -46,6 +48,7 @@ export type Project = {
 	contain?: boolean;
 	featured?: boolean;
 	posts?: string[];
+	figures?: { image: ImageMetadata; alt: string; caption: string }[];
 };
 
 // ponytail: slug comes from the title, so renaming a project changes its URL; add a slug field if that ever matters
@@ -105,6 +108,31 @@ export const projects: Project[] = [
 		image: indohoaxApp,
 		imageAlt: "IndoHoaxDetector running on Hugging Face Spaces, classifying a pasted Indonesian article as HOAX",
 		posts: ["indohoaxdetector-distribution-shift"],
+	},
+	{
+		title: "Protest Emotions and Indonesian Markets (ICCSCI 2026)",
+		org: "BINUS ASO School of Engineering",
+		period: "Oct 2025 - Jun 2026",
+		blurb: "Research paper on the 17+8 protests of August 2025: about 80,000 Indonesian tweets labelled Anger, Fear or Other by GPT-5, turned into a daily net-sentiment index, and tested against same-day IHSG and USD/IDR returns. Sentiment moved with the IHSG (r = +0.36, p = 0.027) but not significantly with the rupiah.",
+		tags: ["NLP", "LLM Labelling", "Python", "Time Series", "Statistics"],
+		points: [
+			"Wrote the IHSG and USD/IDR data download, the tweet cleaning, the GPT-5 labelling pipeline, the correlation and Granger analysis, and the charts for the slides.",
+			"Scraped 42 protest and market keywords from 1 August to 30 September 2025, split into before, during and after the protests; 38 paired trading days.",
+			"Full-period IHSG correlation r = +0.36 (95% CI +0.04 to +0.61), strongest after the protests (r = +0.53, p = 0.043); USD/IDR r = -0.25, not significant. Same-day correlation only: the Granger tests found just a marginal IHSG signal at a two-day lag (p = 0.092).",
+			"Presented online at ICCSCI 2026, BINUS @ Medan, on 18 June 2026, with first author Seline Loewel and co-authors Alleina Felisa Widjaya, Belvareia Reva Utamandarya, Benedictus Rahardjo and Evaristus Didik Madyatmadja. Presented, not yet published.",
+		],
+		href: "https://github.com/theonegareth/twitter_sentiment_analysis",
+		image: iccsciScatter,
+		imageAlt: "Two scatter plots of daily GPT-5 net sentiment against same-day returns, coloured by period: IHSG r = +0.359, p = 0.0269, and USD/IDR r = -0.248, p = 0.133",
+		contain: true,
+		posts: ["iccsci-2026-protest-emotions-markets"],
+		figures: [
+			{
+				image: iccsciTimeline,
+				alt: "IHSG rebased to 100 from August to September 2025, shaded before, during and after the protests, falling after the 25 August start and the 29 August plunge, then climbing to about 109 by late September",
+				caption: "The IHSG over the three periods, rebased to 100, with the main protest events marked.",
+			},
+		],
 	},
 	{
 		title: "HAYABUSA, KRTI 2025",

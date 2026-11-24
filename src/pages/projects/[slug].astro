@@ -50,6 +50,14 @@ const jsonLd = {
 					{project.points.map((point) => <li>{point}</li>)}
 				</ul>
 				{
+					project.figures?.map((figure) => (
+						<figure class="project-figure">
+							<Image src={figure.image} alt={figure.alt} widths={[720, 1080]} sizes="(min-width: 48rem) 62ch, 100vw" />
+							<figcaption>{figure.caption}</figcaption>
+						</figure>
+					))
+				}
+				{
 					posts.length > 0 && (
 						<>
 							<h2>{posts.length > 1 ? "Posts" : "Post"}</h2>
