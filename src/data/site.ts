@@ -351,7 +351,7 @@ export const experience: Job[] = [
 		role: "Secretary (AI Division)",
 		org: "BASE C.O.R.E",
 		location: "South Tangerang, Indonesia",
-		summary: "Managed documentation for 20+ lessons and meetings, and organized the division's curriculum and academic calendar for 30+ members.",
+		summary: "Drew up the AI Division's semester calendar and ran its September 2024 intake: registration, interviews with 9 applicants, and a trial class before lectures began in October. Kept the division's attendance records.",
 	},
 	{
 		period: "Feb 2024 - Jul 2024",
@@ -379,7 +379,7 @@ export const experience: Job[] = [
 		role: "Member",
 		org: "BASE A.I",
 		location: "South Tangerang, Indonesia",
-		summary: "Built and tested 3+ machine learning models in Python, processed and analyzed 5+ datasets for training and evaluation, and collaborated with 15+ peers on documentation and project development.",
+		summary: "Trained three scikit-learn models in Python: a logistic regression predicting exam passes from student data, written up as a short report, and random forests on the iris and blood-transfusion datasets.",
 	},
 ];
 
