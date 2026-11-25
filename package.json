@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "^3.7.3",
-    "astro": "^7.4.11",
+    "@astrojs/sitemap": "^3.7.6",
+    "astro": "^7.4.13",
     "zod": "^4.4.3"
   },
   "allowScripts": {
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "typescript": "^6.0.3",
-    "wrangler": "^4.161.0"
+    "wrangler": "^4.166.0"
   },
   "overrides": {
     "sharp": "^0.35.4"
