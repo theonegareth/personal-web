@@ -120,6 +120,8 @@ which builds to `dist/` and uploads it with Wrangler. The script reads `CLOUDFLA
 
 The canonical hostname is set by `site` in `astro.config.mjs`. It feeds the generated sitemap, the `<link rel="canonical">` tag, and Open Graph URLs — change it there, not in individual pages. `public/robots.txt` points crawlers at `/sitemap-index.xml` and must be updated alongside it if the hostname changes.
 
+After a deploy that adds or changes pages, run `npm run indexnow`. It sends every URL in the live sitemap to Bing and the other IndexNow engines; the key file is `public/<key>.txt`, and the key is in `scripts/indexnow.mjs`. Google does not take IndexNow: request indexing in Search Console.
+
 <p align="right"><a href="#readme-top">back to top</a></p>
 
 ## Contributing

@@ -10,6 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+		"indexnow": "node scripts/indexnow.mjs",
     "deploy": "astro build && . \"$HOME/.env\" && CLOUDFLARE_API_TOKEN=\"$CLOUDFLARE_API_TOKEN_PERSONAL\" CLOUDFLARE_ACCOUNT_ID=\"$CLOUDFLARE_ACCOUNT_ID_PERSONAL\" wrangler pages deploy dist --project-name personal-web --branch main --commit-dirty=true"
   },
   "dependencies": {
