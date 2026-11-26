@@ -849,6 +849,11 @@ section + section {
 	height: auto;
 }
 
+.project-figure .figure-link {
+	display: block;
+	cursor: zoom-in;
+}
+
 .project-figure figcaption {
 	padding: 0.6rem 0.75rem;
 	border-top: 1px solid var(--border);
